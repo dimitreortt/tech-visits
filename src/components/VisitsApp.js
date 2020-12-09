@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react"
-import "bootstrap/dist/css/bootstrap.css"
-import "../styles/styles.scss"
-import Header from "./Header"
-import NoteForm from "./NoteForm"
+import NoteForm from "./VisitForm"
 import db from "../firebase/firebase"
 import { useSelector, useDispatch } from "react-redux"
-import NoteList from "./NoteList"
-import Footer from "./Footer"
+import VisitsList from "./VisitsList"
 import LogoutButton from "./LogoutButton"
-import AddNoteButton from "./AddNoteButton"
+import AddVisitButton from "./AddVisitButton"
 
 export const FieldNotesApp = () => {
   const dispatch = useDispatch()
-  const listSize = useSelector(({ notes }) => (notes ? notes.length : 0))
+  const listSize = useSelector(({ visits }) => (visits ? visits.length : 0))
   const [showForm, setShowForm] = useState(false)
   const userId = useSelector(({ auth }) => auth)
 
@@ -20,19 +16,20 @@ export const FieldNotesApp = () => {
     const downloadNotes = () => {
       db.collection(`users`)
         .doc(userId)
-        .collection("notes")
+        .collection("visits")
         .get()
         .then((snapshot) => {
-          let notes = []
-          snapshot.forEach((noteSnap) => {
+          let visits = []
+          snapshot.forEach((visitSnap) => {
             // convert TIMESTAMP to Date
-            let data = noteSnap.data()
+            let data = visitSnap.data()
             data.date = data.date.toDate()
-            data.noteId = noteSnap.id
-            notes.push(data)
+            data.visitId = visitSnap.id
+            visits.push(data)
           })
 
-          dispatch({ type: "SET_NOTES", notes })
+          dispatch({ type: "SET_VISITS", visits })
+          console.log(visits)
         })
         .then(() => {
           console.log("Notes have been successfully downloaded!")
@@ -49,15 +46,13 @@ export const FieldNotesApp = () => {
 
   return (
     <div>
-      <Header />
-      <div className="container app-content my-5">
-        {!listSize && <h1 className="py-3">Please, start taking notes!</h1>}
-        <AddNoteButton toggleShowForm={toggleShowForm} />
+      <div>
+        {!listSize && <h1>Please, describe your firt visit!</h1>}
+        <AddVisitButton toggleShowForm={toggleShowForm} />
         {showForm && <NoteForm toggleShowForm={toggleShowForm} />}
-        <NoteList />
+        <VisitsList />
         <LogoutButton />
       </div>
-      <Footer />
     </div>
   )
 }

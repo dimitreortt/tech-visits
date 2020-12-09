@@ -1,6 +1,6 @@
 import React from "react"
 import { BrowserRouter as Router, Switch } from "react-router-dom"
-import FieldNotesApp from "../components/FieldNotesApp"
+import VisitsApp from "../components/VisitsApp"
 import LoginPage from "../components/LoginPage"
 import PublicRoute from "./PublicRoute"
 import PrivateRoute from "./PrivateRoute"
@@ -10,7 +10,7 @@ export const AppRouter = (props) => {
     <Router>
       <Switch>
         <PublicRoute path="/login" component={LoginPage} />
-        <PrivateRoute path="/" component={FieldNotesApp} exact />
+        <PrivateRoute path="/" component={VisitsApp} exact />
       </Switch>
     </Router>
   )

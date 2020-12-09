@@ -2,12 +2,10 @@ import React from "react"
 
 export const Header = (props) => {
   return (
-    <div className="header p-3 d-flex align-items-end justify-content-center text-center">
+    <div className="">
       <div>
-        <div className="text-light header__title">Field Notes</div>
-        <div className="text-light header__tagline">
-          Crop Scouting notes made easy
-        </div>
+        <h2>Field Notes</h2>
+        <h3>Crop Scouting notes made easy</h3>
       </div>
     </div>
   )

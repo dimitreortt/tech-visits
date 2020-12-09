@@ -1,5 +1,4 @@
 import React from "react"
-import Header from "./Header"
 import { useDispatch } from "react-redux"
 import { auth } from "../firebase/firebase"
 
@@ -28,39 +27,30 @@ export const LoginPage = (props) => {
   }
 
   return (
-    <div className="login-page-layout">
-      <div className="login-page-layout__background">
-        <Header />
-      </div>
-      <div className="login-page-layout__box">
-        <div className="login-page-layout__title text-dark p-1">
-          FIELD NOTES
-        </div>
+    <div>
+      <div>
+        <div>FIELD NOTES</div>
         <p>Start to get your notes under control!</p>
         <form onSubmit={onFormSubmit}>
           <div>
-            <div className="form-group text-left mb-2">
+            <div>
               <label htmlFor="mailInput">E-mail</label>
               <input
                 type="email"
-                className="form-control"
                 placeholder="Enter E-mail"
                 id="mainInput"
               ></input>
             </div>
-            <div className="form-group text-left">
+            <div>
               <label htmlFor="passwordInput">Password</label>
               <input
                 type="password"
-                className="form-control"
                 placeholder="Enter Password"
                 id="passwordInput"
               ></input>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary btn-lg">
-            Login with E-mail
-          </button>
+          <button type="submit">Login with E-mail</button>
         </form>
       </div>
     </div>

@@ -12,8 +12,8 @@ export const NoteForm = (props) => {
   const userId = useSelector(({ auth }) => auth)
 
   useEffect(() => {
-    if (!!props.note) {
-      const { date, author, description } = props.note
+    if (!!props.visit) {
+      const { date, author, description } = props.visit
       setDateInput(date)
       setNameInput(author)
       setDescriptionInput(description)
@@ -28,18 +28,19 @@ export const NoteForm = (props) => {
     setDescriptionInput(e.target.value)
   }
 
-  const addNote = (note) => {
+  const addVisit = (visit) => {
     db.collection(`users`)
       .doc(userId)
-      .collection("notes")
-      .add(note)
+      .collection("visits")
+      .add(visit)
       .then((docRef) => {
         console.log("Document successfully created")
-        note.noteId = docRef.id
+        visit.visitId = docRef.id
         setNameInput("")
         setDescriptionInput("")
 
-        dispatch({ type: "ADD_NOTE", note })
+        dispatch({ type: "ADD_VISIT", visit })
+        console.log(visit, "dispatch visit")
         props.toggleShowForm()
       })
       .catch((error) => {
@@ -47,17 +48,17 @@ export const NoteForm = (props) => {
       })
   }
 
-  const updateNote = (newNote) => {
+  const updateVisit = (newVisit) => {
     db.collection("users")
       .doc(userId)
-      .collection("notes")
-      .doc(props.note.noteId)
-      .update(newNote)
+      .collection("visits")
+      .doc(props.visit.visitId)
+      .update(newVisit)
       .then(() => {
         console.log("Document successfully updated")
         dispatch({
-          type: "EDIT_NOTE",
-          note: { ...newNote, noteId: props.note.noteId },
+          type: "EDIT_VISIT",
+          visit: { ...newVisit, visitId: props.visit.visitId },
         })
 
         setNameInput("")
@@ -77,16 +78,16 @@ export const NoteForm = (props) => {
       return
     }
 
-    const note = {
+    const visit = {
       author: nameInput,
       description: descriptionInput,
       date: dateInput,
     }
-    !!props.note ? updateNote(note) : addNote(note)
+    !!props.visit ? updateVisit(visit) : addVisit(visit)
   }
 
   return (
-    <div className="note-form border border-success rounded">
+    <div className="visit-form border border-success rounded">
       <form className="" onSubmit={onFormSubmit}>
         <div className="row">
           <div className="col-sm-12 col-md-8">

@@ -1,8 +1,8 @@
 import authReducer from "./auth"
-import notesReducer from "./notes"
+import visitsReducer from "./visits"
 import { combineReducers } from "redux"
 
 export const rootReducer = combineReducers({
-  notes: notesReducer,
+  visits: visitsReducer,
   auth: authReducer,
 })
