@@ -12,15 +12,22 @@ const downloadVisits = (fieldId, dispatch) => {
     .then((snapshot) => {
       let visits = []
       snapshot.forEach((visitSnap) => {
-        // convert TIMESTAMP to Date
-        let data = visitSnap.data()
-        data.date = data.date.toDate()
+        let data = {}
+        let entries = Object.entries(visitSnap.data())
+        entries.forEach(([key, value]) => {
+          try {
+            // convert TIMESTAMP to Datey
+            value = value.toDate()
+          } catch (error) {}
+
+          data[key] = value
+        })
         data.visitId = visitSnap.id
         visits.push(data)
       })
 
       dispatch({ type: "SET_VISITS", visits })
-      console.log(visits, "asoijdaoisdj")
+      console.log(visits)
     })
     .then(() => {
       console.log("Notes have been successfully downloaded!")

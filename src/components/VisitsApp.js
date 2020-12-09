@@ -29,7 +29,6 @@ export const FieldNotesApp = () => {
   return (
     <div>
       <div>
-        {!!fieldId && fieldId}
         {!listSize && <h1>Please, describe your firt visit!</h1>}
         <AddVisitButton toggleShowForm={toggleShowForm} />
         {showForm && <NoteForm toggleShowForm={toggleShowForm} />}

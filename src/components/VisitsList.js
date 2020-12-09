@@ -3,16 +3,14 @@ import { useSelector, useDispatch } from "react-redux"
 import Visit from "./Visit"
 
 export const VisitsList = (props) => {
-  const storeVisits = useSelector(({ visits }) =>
+  const visits = useSelector(({ visits }) =>
     visits ? visits.sort((a, b) => b.date - a.date) : visits
   )
 
   return (
     <div>
-      {!!storeVisits &&
-        storeVisits.map((visitData, index) => (
-          <Visit key={index} data={visitData} />
-        ))}
+      {!!visits &&
+        visits.map((visit, index) => <Visit key={index} visit={visit} />)}
     </div>
   )
 }

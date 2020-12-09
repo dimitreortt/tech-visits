@@ -10,6 +10,10 @@ export const visitsReducer = (state = defaultVisitsState, action) => {
       return state.map((visit) =>
         visit.visitId === action.visit.visitId ? action.visit : visit
       )
+    case "EDIT_VISIT_ENTRIES":
+      return state.map((visit) =>
+        visit.visitId === action.visit.visitId ? action.visit : visit
+      )
     case "SET_VISITS":
       return action.visits
     default:

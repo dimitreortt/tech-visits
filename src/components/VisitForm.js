@@ -57,30 +57,28 @@ export const VisitForm = (props) => {
   }
 
   return (
-    <div className="visit-form border border-success rounded">
-      <form className="" onSubmit={onFormSubmit}>
-        <div className="row">
-          <div className="col-sm-12 col-md-8">
-            <div className="form-group">
+    <div>
+      <form onSubmit={onFormSubmit}>
+        <div>
+          <div>
+            <div>
               <label htmlFor="nameInput" className="ml-1">
                 Author Name
               </label>
               <input
                 id="nameInput"
-                className="form-control"
                 type="text"
                 placeholder="Enter Name"
                 value={nameInput}
                 onChange={onInputChange}
               ></input>
             </div>
-            <div className="form-group">
+            <div>
               <label htmlFor="descriptionInput" className="ml-1">
                 Description
               </label>
               <textarea
                 id="nameInput"
-                className="form-control"
                 placeholder="Enter Description"
                 rows="3"
                 onChange={onDescriptionInputChange}
@@ -88,24 +86,18 @@ export const VisitForm = (props) => {
               ></textarea>
             </div>
           </div>
-          <div className="col-sm-12 col-md-4">
-            <div className="h-100 d-flex flex-column justify-content-between align-items-center">
-              <div className="form-group justify-content-center">
+          <div>
+            <div>
+              <div>
                 <label className="d-block">Date</label>
                 <DatePicker
                   selected={dateInput}
                   onChange={(date) => setDateInput(date)}
-                  className="form-control"
                   id="dateInput"
                 />
               </div>
-              <div className="col align-self-end d-flex align-items-center">
-                <button
-                  type="submit"
-                  className="btn btn-outline-success btn-lg rounded-pill btn-block"
-                >
-                  Save
-                </button>
+              <div>
+                <button type="submit">Save</button>
               </div>
             </div>
           </div>
