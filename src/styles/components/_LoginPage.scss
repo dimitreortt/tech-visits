@@ -1,0 +1,36 @@
+.login-page-layout {
+  // background: url("/images/bg.jpg");
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.login-page-layout__background {
+  background: url("../../img/crop.jpg");
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  opacity: 0.3;
+}
+
+.login-page-layout__box {
+  position: relative;
+  background: fade-out($color: white, $amount: 0.12);
+  // background: rgba($color: white, $alpha: 0.8);
+  // background: black;
+  border-radius: 3px;
+  width: 25rem;
+  text-align: center;
+  padding: $l-size $m-size;
+  opacity: 1;
+}
+
+.login-page-layout__title {
+  margin: 0 0 0 0;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+}

@@ -1,0 +1,43 @@
+@font-face {
+  font-family: countryFont; // brightside demo
+  src: url("../fonts/CountryCafeCaps-XxJj.otf");
+  /* IE9 Compat Modes */
+}
+
+@font-face {
+  font-family: picnicFont; // brightside demo
+  src: url("../fonts/PicnicfortwoRegular-pAXr.ttf");
+  /* IE9 Compat Modes */
+}
+
+@font-face {
+  font-family: ropestFont; // brightside demo
+  src: url("../fonts/RopestPersonalUseOnly-wrpx.ttf");
+  /* IE9 Compat Modes */
+}
+
+.header {
+  height: 400px;
+  background-image: url("../../img/crop.jpg");
+  background-size: cover;
+  background-position: 50%;
+}
+
+.header__title {
+  font-family: countryFont, Cambria, Cochin, Georgia, Times, "Times New Roman",
+    serif;
+  font-size: 10rem;
+  letter-spacing: 3px;
+
+  @media (max-width: 576px) {
+    font-size: 5rem;
+  }
+}
+
+.header__tagline {
+  font-size: 2rem;
+  font-weight: 500;
+  font-family: ropestFont, Cambria, Cochin, Georgia, Times, "Times New Roman",
+    serif;
+  letter-spacing: 1.5px;
+}
