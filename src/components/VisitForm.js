@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react"
 import "react-datepicker/dist/react-datepicker.css"
 import DatePicker from "react-datepicker"
-import db from "../firebase/firebase"
 import { useDispatch, useSelector } from "react-redux"
+import addVisit from "../db/addVisit"
+import updateVisit from "../db/updateVisit"
 
-export const NoteForm = (props) => {
+export const VisitForm = (props) => {
   const [dateInput, setDateInput] = useState(new Date())
   const [nameInput, setNameInput] = useState("")
   const [descriptionInput, setDescriptionInput] = useState("")
   const dispatch = useDispatch()
   const userId = useSelector(({ auth }) => auth)
+  const fieldId = useSelector(({ fieldId }) => fieldId)
 
   useEffect(() => {
     if (!!props.visit) {
@@ -28,48 +30,6 @@ export const NoteForm = (props) => {
     setDescriptionInput(e.target.value)
   }
 
-  const addVisit = (visit) => {
-    db.collection(`users`)
-      .doc(userId)
-      .collection("visits")
-      .add(visit)
-      .then((docRef) => {
-        console.log("Document successfully created")
-        visit.visitId = docRef.id
-        setNameInput("")
-        setDescriptionInput("")
-
-        dispatch({ type: "ADD_VISIT", visit })
-        console.log(visit, "dispatch visit")
-        props.toggleShowForm()
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  const updateVisit = (newVisit) => {
-    db.collection("users")
-      .doc(userId)
-      .collection("visits")
-      .doc(props.visit.visitId)
-      .update(newVisit)
-      .then(() => {
-        console.log("Document successfully updated")
-        dispatch({
-          type: "EDIT_VISIT",
-          visit: { ...newVisit, visitId: props.visit.visitId },
-        })
-
-        setNameInput("")
-        setDescriptionInput("")
-        props.setInEditMode(false)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
   const onFormSubmit = (e) => {
     e.preventDefault()
 
@@ -83,7 +43,17 @@ export const NoteForm = (props) => {
       description: descriptionInput,
       date: dateInput,
     }
-    !!props.visit ? updateVisit(visit) : addVisit(visit)
+    !!props.visit
+      ? updateVisit(visit, props.visit.visitId, dispatch).then(() => {
+          setNameInput("")
+          setDescriptionInput("")
+          props.setInEditMode(false)
+        })
+      : addVisit(visit, fieldId, dispatch).then(() => {
+          setNameInput("")
+          setDescriptionInput("")
+          props.toggleShowForm()
+        })
   }
 
   return (
@@ -145,4 +115,4 @@ export const NoteForm = (props) => {
   )
 }
 
-export default NoteForm
+export default VisitForm

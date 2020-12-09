@@ -3,23 +3,14 @@ import db from "../firebase/firebase"
 import VisitForm from "./VisitForm"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
+import removeVisit from "../db/removeVisit"
 
 export const Visit = ({ data: { description, author, date, visitId } }) => {
   const [inEditMode, setInEditMode] = useState(false)
   const dispatch = useDispatch()
-  const userId = useSelector(({ auth }) => auth)
 
-  const removeVisit = () => {
-    db.collection(`users`)
-      .doc(userId)
-      .collection("visits")
-      .doc(visitId)
-      .delete()
-      .then(() => {
-        console.log("Visit was successfully deleted")
-        dispatch({ type: "REMOVE_VISIT", visitId })
-      })
-      .catch((error) => console.log(error))
+  const handleRemoveVisit = () => {
+    removeVisit(visitId, dispatch)
   }
 
   const toggleInEditMode = () => {
@@ -50,7 +41,7 @@ export const Visit = ({ data: { description, author, date, visitId } }) => {
             <button onClick={toggleInEditMode}>Edit</button>
           </div>
           <div>
-            <button onClick={removeVisit}>Remove</button>
+            <button onClick={handleRemoveVisit}>Remove</button>
           </div>
         </div>
       </div>

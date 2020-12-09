@@ -9,7 +9,6 @@ export const LoginPage = (props) => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        dispatch({ type: "LOGOUT" })
         alert("The user has been successfully signed in!")
       })
       .catch((error) => {

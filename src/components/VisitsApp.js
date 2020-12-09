@@ -1,43 +1,25 @@
 import React, { useEffect, useState } from "react"
 import NoteForm from "./VisitForm"
-import db from "../firebase/firebase"
 import { useSelector, useDispatch } from "react-redux"
 import VisitsList from "./VisitsList"
 import LogoutButton from "./LogoutButton"
 import AddVisitButton from "./AddVisitButton"
+import { useParams } from "react-router-dom"
+import downloadVisits from "../db/downloadVisits"
 
 export const FieldNotesApp = () => {
   const dispatch = useDispatch()
   const listSize = useSelector(({ visits }) => (visits ? visits.length : 0))
   const [showForm, setShowForm] = useState(false)
-  const userId = useSelector(({ auth }) => auth)
+  const fieldId = useSelector(({ fieldId }) => fieldId)
+  const params = useParams()
 
   useEffect(() => {
-    const downloadNotes = () => {
-      db.collection(`users`)
-        .doc(userId)
-        .collection("visits")
-        .get()
-        .then((snapshot) => {
-          let visits = []
-          snapshot.forEach((visitSnap) => {
-            // convert TIMESTAMP to Date
-            let data = visitSnap.data()
-            data.date = data.date.toDate()
-            data.visitId = visitSnap.id
-            visits.push(data)
-          })
+    downloadVisits(fieldId, dispatch)
+  }, [fieldId])
 
-          dispatch({ type: "SET_VISITS", visits })
-          console.log(visits)
-        })
-        .then(() => {
-          console.log("Notes have been successfully downloaded!")
-        })
-        .catch((e) => console.log(e))
-    }
-
-    downloadNotes()
+  useEffect(() => {
+    dispatch({ type: "SET_FIELD_ID", fieldId: params.fieldId })
   }, [])
 
   const toggleShowForm = () => {
@@ -47,6 +29,7 @@ export const FieldNotesApp = () => {
   return (
     <div>
       <div>
+        {!!fieldId && fieldId}
         {!listSize && <h1>Please, describe your firt visit!</h1>}
         <AddVisitButton toggleShowForm={toggleShowForm} />
         {showForm && <NoteForm toggleShowForm={toggleShowForm} />}
