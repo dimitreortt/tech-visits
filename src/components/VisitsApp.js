@@ -28,13 +28,11 @@ export const FieldNotesApp = () => {
 
   return (
     <div>
-      <div>
-        {!listSize && <h1>Please, describe your firt visit!</h1>}
-        <AddVisitButton toggleShowForm={toggleShowForm} />
-        {showForm && <NoteForm toggleShowForm={toggleShowForm} />}
-        <VisitsList />
-        <LogoutButton />
-      </div>
+      {!listSize && <h1>Please, describe your firt visit!</h1>}
+      <AddVisitButton toggleShowForm={toggleShowForm} />
+      {showForm && <NoteForm toggleShowForm={toggleShowForm} />}
+      <VisitsList />
+      <LogoutButton />
     </div>
   )
 }

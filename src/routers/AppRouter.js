@@ -5,10 +5,11 @@ import PrivateRoute from "./PrivateRoute"
 import NotFoundPage from "../components/NotFoundPage"
 
 export const AppRouter = (props) => {
+  console.log("to no app routers")
   return (
     <Router>
       <Switch>
-        <PrivateRoute path="/:fieldId" component={VisitsApp} exact />
+        <PrivateRoute path="/:fieldId" component={VisitsApp} />
         <Route component={NotFoundPage} />
       </Switch>
     </Router>
