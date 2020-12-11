@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import DatePicker from "react-datepicker"
+import { TextField } from "@material-ui/core"
 
 export const VisitField = ({
   fieldLabel,
@@ -43,58 +44,56 @@ export const VisitField = ({
 
   return (
     <div>
-      <div>
-        <strong>{fieldLabel}: </strong>
-        <span>
-          {fieldValueType == "date" && fieldValue.toLocaleDateString()}
-          {fieldValueType == "string" && fieldValue}
-          {fieldValueType == "checklist" &&
-            !!fieldValue &&
-            fieldValue.map((value, index) => (
-              <React.Fragment key={index}>
-                <div>
-                  <input
-                    type="checkbox"
-                    id={index}
-                    name={value}
-                    value={value}
-                    checked
-                    disabled
-                  ></input>
-                  <label htmlFor={index}> {value}</label>
-                </div>
-              </React.Fragment>
-            ))}
-        </span>
-        {inEditFieldMode && (
-          <div>
-            <form onSubmit={onFormSubmit}>
+      <strong>{fieldLabel}: </strong>
+      <span>
+        {fieldValueType == "date" && fieldValue.toLocaleDateString()}
+        {fieldValueType == "string" && fieldValue}
+        {fieldValueType == "checklist" &&
+          !!fieldValue &&
+          fieldValue.map((value, index) => (
+            <React.Fragment key={index}>
+              <div>
+                <input
+                  type="checkbox"
+                  id={index}
+                  name={value}
+                  value={value}
+                  checked
+                  disabled
+                ></input>
+                <label htmlFor={index}> {value}</label>
+              </div>
+            </React.Fragment>
+          ))}
+      </span>
+      {inEditFieldMode && (
+        <div>
+          <form onSubmit={onFormSubmit}>
+            <input
+              type="text"
+              value={keyInput}
+              onChange={(e) => setKeyInput(e.target.value)}
+            ></input>
+            {!isDateValue ? (
               <input
                 type="text"
-                value={keyInput}
-                onChange={(e) => setKeyInput(e.target.value)}
+                value={valueInput}
+                onChange={(e) => setValueInput(e.target.value)}
               ></input>
-              {!isDateValue ? (
-                <input
-                  type="text"
-                  value={valueInput}
-                  onChange={(e) => setValueInput(e.target.value)}
-                ></input>
-              ) : (
-                <DatePicker
-                  selected={valueInput}
-                  onChange={(date) => setValueInput(date)}
-                  id="dateInput"
-                />
-              )}
-              <button type="submit">Save</button>
-            </form>
-          </div>
-        )}
-        {editable && (
-          <button onClick={() => toggleInEditFieldMode()}>Edit Field</button>
-        )}
-      </div>
+            ) : (
+              <DatePicker
+                selected={valueInput}
+                onChange={(date) => setValueInput(date)}
+                id="dateInput"
+              />
+            )}
+            <button type="submit">Save</button>
+          </form>
+        </div>
+      )}
+      {editable && (
+        <button onClick={() => toggleInEditFieldMode()}>Edit Field</button>
+      )}
     </div>
   )
 }

@@ -5,6 +5,8 @@ import removeVisit from "../db/removeVisit"
 import VisitField from "./VisitField"
 import updateVisitEntries from "../db/updateVisitEntries"
 import VisitAddFieldForm from "./AddVisitFieldPaper"
+import { Paper, Box, Grid, Button } from "@material-ui/core"
+import AddCircleIcon from "@material-ui/icons/AddCircle"
 
 // export const Visit = ({ data: { description, author, date, visitId } }) => {
 export const Visit = ({ visit }) => {
@@ -83,34 +85,85 @@ export const Visit = ({ visit }) => {
   }
 
   return (
-    <div>
-      {entries.map(([fieldId, value]) => {
-        const fieldObj = fieldIdToObj(fieldId)
-        console.log(fieldObj, "fieldObj")
+    <Box marginBottom={1}>
+      <Paper>
+        <Grid container spacing={1}>
+          <Grid item xs={12} md={4}>
+            <Box marginX={2}>
+              <Grid container spacing={1}>
+                {entries.map(([fieldId, value]) => {
+                  const fieldObj = fieldIdToObj(fieldId)
+                  console.log(fieldObj, "fieldObj")
 
-        return (
-          <VisitField
-            key={fieldId}
-            editField={editField}
-            fieldValue={value}
-            fieldValueType={fieldObj.valueType}
-            fieldLabel={fieldObj.label}
-            editable={!fieldObj.isDefault}
-          />
-        )
-      })}
-      <div>
-        <button onClick={toggleInAddFieldMode}>Add Field</button>
-        {inAddFieldMode && <VisitAddFieldForm addField={addField} />}
-      </div>
-      <div>
-        <button onClick={toggleInEditMode}>Edit</button>
-      </div>
-      <div>
-        <button onClick={handleRemoveVisit}>Remove</button>
-      </div>
-      {inEditMode && <VisitForm setInEditMode={setInEditMode} visit={visit} />}
-    </div>
+                  return (
+                    <Grid item xs={12} key={fieldId}>
+                      <VisitField
+                        editField={editField}
+                        fieldValue={value}
+                        fieldValueType={fieldObj.valueType}
+                        fieldLabel={fieldObj.label}
+                        editable={!fieldObj.isDefault}
+                      />
+                    </Grid>
+                  )
+                })}
+              </Grid>
+            </Box>
+          </Grid>
+        </Grid>
+        <Box marginX={1}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={4}>
+              <Button
+                // variant="contained"
+                variant="outlined"
+                color="primary"
+                onClick={toggleInAddFieldMode}
+                size="small"
+                startIcon={<AddCircleIcon />}
+                fullWidth
+              >
+                Add Field
+              </Button>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              {/* <div>
+              <button onClick={toggleInEditMode}>Edit</button>
+            </div> */}
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={toggleInEditMode}
+                // startIcon={<AddCircleIcon />}
+                size="small"
+                fullWidth
+              >
+                Edit
+              </Button>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              {/* <div>
+              <button onClick={handleRemoveVisit}>Remove</button>
+            </div> */}
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={handleRemoveVisit}
+                size="small"
+                // startIcon={<AddCircleIcon />}
+                fullWidth
+              >
+                Remove
+              </Button>
+            </Grid>
+          </Grid>
+          {inEditMode && (
+            <VisitForm setInEditMode={setInEditMode} visit={visit} />
+          )}
+          {inAddFieldMode && <VisitAddFieldForm addField={addField} />}
+        </Box>
+      </Paper>
+    </Box>
   )
 }
 

@@ -7,6 +7,18 @@ import updateVisit from "../db/updateVisit"
 import { AddVisitFormField } from "./AddVisitFormField"
 import AddVisitContext from "../contexts/addVisitContext"
 import db from "../firebase/firebase"
+import { Paper, Box, makeStyles } from "@material-ui/core"
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(1),
+    // textAlign: "center",
+    // color: theme.palette.text.secondary,
+  },
+}))
 
 export const AddVisitForm = (props) => {
   const [dateInput, setDateInput] = useState(new Date())
@@ -20,6 +32,7 @@ export const AddVisitForm = (props) => {
     visitFields.map((visitField) => visitField.fieldId)
   )
   // console.log(visitFields, visitFieldsIds)
+  const classes = useStyles()
 
   useEffect(() => {
     if (!!props.visit) {
@@ -130,14 +143,14 @@ export const AddVisitForm = (props) => {
   }
 
   return (
-    <div>
+    <Paper className={classes.paper}>
       <AddVisitContext.Provider value={{ visitState, updateValue }}>
         {visitFields.map((field, index) => (
           <AddVisitFormField field={field} key={index} />
         ))}
         <button onClick={addVisit}>Save</button>
       </AddVisitContext.Provider>
-    </div>
+    </Paper>
   )
 }
 
