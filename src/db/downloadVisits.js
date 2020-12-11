@@ -12,25 +12,20 @@ const downloadVisits = (fieldId, dispatch) => {
     .then((snapshot) => {
       let visits = []
       snapshot.forEach((visitSnap) => {
-        let data = {}
-        let entries = Object.entries(visitSnap.data())
-        entries.forEach(([key, value]) => {
-          try {
-            // convert TIMESTAMP to Datey
-            value = value.toDate()
-          } catch (error) {}
-
-          data[key] = value
-        })
+        let data = visitSnap.data()
         data.visitId = visitSnap.id
+
+        Object.entries(data).forEach(([key, value]) => {
+          try {
+            data[key] = value.toDate()
+          } catch (error) {}
+        })
+
         visits.push(data)
       })
 
+      console.log("Raw visits have been successfully downloaded")
       dispatch({ type: "SET_VISITS", visits })
-      console.log(visits)
-    })
-    .then(() => {
-      console.log("Notes have been successfully downloaded!")
     })
     .catch((e) => console.log(e))
 }

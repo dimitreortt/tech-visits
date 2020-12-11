@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
-import VisitForm from "./VisitForm"
-import { useDispatch } from "react-redux"
+import VisitForm from "./AddVisitForm"
+import { useDispatch, useSelector } from "react-redux"
 import removeVisit from "../db/removeVisit"
 import VisitField from "./VisitField"
 import updateVisitEntries from "../db/updateVisitEntries"
-import VisitAddFieldForm from "./VisitAddFieldForm"
+import VisitAddFieldForm from "./AddVisitFieldPaper"
 
 // export const Visit = ({ data: { description, author, date, visitId } }) => {
 export const Visit = ({ visit }) => {
@@ -12,10 +12,11 @@ export const Visit = ({ visit }) => {
   const [inAddFieldMode, setInAddFieldMode] = useState(false)
   const dispatch = useDispatch()
   const [entries, setEntries] = useState([])
+  const visitFields = useSelector(({ visitFields }) => visitFields)
 
   useEffect(() => {
-    let entries = Object.entries(visit).filter(
-      ([key, value]) => key != "fieldId" && key != "visitId"
+    const entries = Object.entries(visit).filter(
+      ([key, value]) => key != "visitId" && key != "fieldId"
     )
     setEntries(entries)
   }, [])
@@ -67,20 +68,34 @@ export const Visit = ({ visit }) => {
     e.preventDefault()
   }
 
+  const mapFieldsIdsToObjects = () => {
+    let fieldsObjs = {}
+    visitFields.forEach((field) => {
+      // idsToLabels[field.fieldId] = field.label
+      fieldsObjs[field.fieldId] = field
+    })
+    return fieldsObjs
+  }
+
+  const fieldIdToObj = (id) => {
+    const fieldsObjs = mapFieldsIdsToObjects()
+    return fieldsObjs[id]
+  }
+
   return (
     <div>
-      {entries.map(([key, value], index) => {
-        if (value instanceof Date) {
-          // value = value.toLocaleDateString()
-        }
-        // console.log(index, "index")
-        // console.log(key, value)
+      {entries.map(([fieldId, value]) => {
+        const fieldObj = fieldIdToObj(fieldId)
+        console.log(fieldObj, "fieldObj")
+
         return (
           <VisitField
-            key={key}
+            key={fieldId}
             editField={editField}
             fieldValue={value}
-            fieldKey={key}
+            fieldValueType={fieldObj.valueType}
+            fieldLabel={fieldObj.label}
+            editable={!fieldObj.isDefault}
           />
         )
       })}

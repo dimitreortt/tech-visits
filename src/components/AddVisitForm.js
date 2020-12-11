@@ -4,14 +4,22 @@ import DatePicker from "react-datepicker"
 import { useDispatch, useSelector } from "react-redux"
 import addVisit from "../db/addVisit"
 import updateVisit from "../db/updateVisit"
+import { AddVisitFormField } from "./AddVisitFormField"
+import AddVisitContext from "../contexts/addVisitContext"
+import db from "../firebase/firebase"
 
-export const VisitForm = (props) => {
+export const AddVisitForm = (props) => {
   const [dateInput, setDateInput] = useState(new Date())
   const [nameInput, setNameInput] = useState("")
   const [descriptionInput, setDescriptionInput] = useState("")
   const dispatch = useDispatch()
   const userId = useSelector(({ auth }) => auth)
   const fieldId = useSelector(({ fieldId }) => fieldId)
+  const visitFields = useSelector(({ visitFields }) => visitFields)
+  const visitFieldsIds = useSelector(({ visitFields }) =>
+    visitFields.map((visitField) => visitField.fieldId)
+  )
+  // console.log(visitFields, visitFieldsIds)
 
   useEffect(() => {
     if (!!props.visit) {
@@ -56,9 +64,87 @@ export const VisitForm = (props) => {
         })
   }
 
+  const mapFieldsIdsToStateObject = (ids) => {
+    let stateObj = {}
+    ids.forEach((id) => {
+      stateObj[id] = ""
+    })
+    return stateObj
+  }
+
+  const [visitState, setVisitState] = useState()
+
+  const resetVisitState = () => {
+    setVisitState(mapFieldsIdsToStateObject(visitFieldsIds))
+  }
+
+  useEffect(() => {
+    resetVisitState()
+  }, [visitFields])
+
+  useEffect(() => {
+    console.log(visitState)
+  }, [visitState])
+
+  const updateValue = (key, val) => {
+    setVisitState({ ...visitState, [key]: val })
+  }
+
+  const verifyStateRequirements = () => {
+    // VERIFICAR SE OS REQUERIMENTOS SÃO ATENDIDOS
+    let errorMessage = ""
+    visitFields.forEach((field) => {
+      if (field.required && visitState[field.fieldId] == "") {
+        errorMessage += "Field " + field.label + " is required!\n"
+      }
+    })
+    if (errorMessage) {
+      alert(errorMessage)
+      return false
+    }
+    return true
+  }
+
+  const addVisit = () => {
+    // DISPACHAR PARA O BD E PARA O REDUX
+    console.log(visitState, "in save")
+    console.log(visitFields, "in save")
+
+    if (!verifyStateRequirements()) {
+      return
+    }
+
+    let visitObj = { ...visitState, fieldId }
+    db.collection("visits")
+      .add(visitObj)
+      .then((docRef) => {
+        dispatch({
+          type: "ADD_VISIT",
+          visit: { ...visitObj, visitId: docRef.id },
+        })
+      })
+      .catch((e) => console.log(e))
+
+    // resetVisitState()
+    props.toggleShowForm()
+  }
+
   return (
     <div>
-      <form onSubmit={onFormSubmit}>
+      <AddVisitContext.Provider value={{ visitState, updateValue }}>
+        {visitFields.map((field, index) => (
+          <AddVisitFormField field={field} key={index} />
+        ))}
+        <button onClick={addVisit}>Save</button>
+      </AddVisitContext.Provider>
+    </div>
+  )
+}
+
+export default AddVisitForm
+
+{
+  /* <form onSubmit={onFormSubmit}>
         <div>
           <div>
             <div>
@@ -102,9 +188,5 @@ export const VisitForm = (props) => {
             </div>
           </div>
         </div>
-      </form>
-    </div>
-  )
+      </form> */
 }
-
-export default VisitForm

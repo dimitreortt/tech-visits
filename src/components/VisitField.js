@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from "react"
 import DatePicker from "react-datepicker"
 
-export const VisitField = ({ fieldKey, fieldValue, editField }) => {
+export const VisitField = ({
+  fieldLabel,
+  fieldValue,
+  editField,
+  editable,
+  fieldValueType,
+}) => {
   const [inEditFieldMode, setInEditFieldMode] = useState(false)
   const [keyInput, setKeyInput] = useState("")
   const [valueInput, setValueInput] = useState("")
   const [isDateValue, setIsDateValue] = useState(null)
 
+  console.log(isDateValue, fieldValue, fieldValueType, "in Visit Field")
+
   useEffect(() => {
-    setKeyInput(fieldKey)
-    setValueInput(fieldValue)
     if (fieldValue instanceof Date) {
       setIsDateValue(true)
     } else {
       setIsDateValue(false)
     }
+    setKeyInput(fieldLabel)
+    setValueInput(fieldValue)
   }, [])
 
   const toggleInEditFieldMode = () => {
@@ -29,17 +37,34 @@ export const VisitField = ({ fieldKey, fieldValue, editField }) => {
       return
     }
 
-    editField(fieldKey, keyInput, valueInput)
+    editField(fieldLabel, keyInput, valueInput)
     toggleInEditFieldMode()
   }
 
   return (
     <div>
       <div>
-        <strong>{fieldKey}: </strong>
+        <strong>{fieldLabel}: </strong>
         <span>
-          {isDateValue != null &&
-            (isDateValue ? fieldValue.toLocaleDateString() : fieldValue)}{" "}
+          {fieldValueType == "date" && fieldValue.toLocaleDateString()}
+          {fieldValueType == "string" && fieldValue}
+          {fieldValueType == "checklist" &&
+            !!fieldValue &&
+            fieldValue.map((value, index) => (
+              <React.Fragment key={index}>
+                <div>
+                  <input
+                    type="checkbox"
+                    id={index}
+                    name={value}
+                    value={value}
+                    checked
+                    disabled
+                  ></input>
+                  <label htmlFor={index}> {value}</label>
+                </div>
+              </React.Fragment>
+            ))}
         </span>
         {inEditFieldMode && (
           <div>
@@ -66,7 +91,9 @@ export const VisitField = ({ fieldKey, fieldValue, editField }) => {
             </form>
           </div>
         )}
-        <button onClick={() => toggleInEditFieldMode()}>Edit Field</button>
+        {editable && (
+          <button onClick={() => toggleInEditFieldMode()}>Edit Field</button>
+        )}
       </div>
     </div>
   )
