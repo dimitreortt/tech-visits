@@ -8,6 +8,8 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
   const [loading] = useIsLoggedIn()
   const userId = useSelector(({ auth }) => auth)
 
+  console.log(rest.path, "in private route")
+
   return (
     <Route
       {...rest}

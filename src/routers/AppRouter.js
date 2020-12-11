@@ -9,7 +9,8 @@ export const AppRouter = (props) => {
   return (
     <Router>
       <Switch>
-        <PrivateRoute path="/:fieldId" component={VisitsApp} />
+        <PrivateRoute path="/coopasvtech/:fieldId" component={VisitsApp} />
+        {/* <Route path="/coopasvtech/:fieldId" component={VisitsApp} /> */}
         <Route component={NotFoundPage} />
       </Switch>
     </Router>
