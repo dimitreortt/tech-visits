@@ -5,9 +5,12 @@ import AppRouter from "./routers/AppRouter"
 import { Provider } from "react-redux"
 import { createStore } from "redux"
 import { rootReducer } from "./reducers"
+import { composeWithDevTools } from "redux-devtools-extension"
 import "./setup"
+import configureStore from "./store/configureStore"
 
-const store = createStore(rootReducer)
+// const store = createStore(rootReducer, composeWithDevTools())
+const store = configureStore()
 
 ReactDOM.render(
   <React.StrictMode>

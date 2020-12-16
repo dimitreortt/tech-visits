@@ -22,7 +22,7 @@ export const EditVisitForm = (props) => {
   const classes = useStyles()
   const [visitState, setVisitState] = useState()
   const [shouldUpdate, setShouldUpdate] = useState()
-  const [visitFields, setFields] = useState([])
+  const [visitFields, setVisitFields] = useState([])
   const dispatch = useDispatch()
   const visits = useSelector(({ visits }) => {
     return visits
@@ -47,7 +47,7 @@ export const EditVisitForm = (props) => {
 
     console.log(fields, newState, "in edit visit form newstate")
     setVisitState(newState)
-    setFields(fields)
+    setVisitFields(fields)
   }, [])
 
   useEffect(() => {
@@ -66,10 +66,12 @@ export const EditVisitForm = (props) => {
             (formField) => formField.fieldId === visitField.fieldId
           )
         }
+        return visitField
       })
 
       console.log(fieldsToBeAdded, "fieldsToBeAdded")
       console.log(newVisitFields, "newVisitFields")
+      setVisitFields(newVisitFields.concat(fieldsToBeAdded))
     } else {
       console.log("shouldnt")
     }
