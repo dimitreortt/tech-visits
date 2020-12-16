@@ -9,7 +9,12 @@ const useStyles = (theme) => ({
   },
 })
 
-export const Checklist = ({ checklistItems, handleChecklistState, label }) => {
+export const Checklist = ({
+  checklistItems,
+  handleChecklistState,
+  label,
+  checked,
+}) => {
   const classes = useStyles()
 
   return (
@@ -26,6 +31,7 @@ export const Checklist = ({ checklistItems, handleChecklistState, label }) => {
                 value={item}
                 onChange={handleChecklistState}
                 name={item}
+                // checked={checked.includes(item)}
               />
             }
             label={item}

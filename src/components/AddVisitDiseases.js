@@ -21,8 +21,10 @@ export const AddVisitDiseases = (props) => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    // dispachar um 'UPDATE_FIELD' para o redux para atualizar o campo de diseases &
-    // atualizar o banco de dados também
+    if (!newDiseaseName) {
+      return alert("Disease name must not be empty!")
+    }
+
     console.log(newDiseaseName, "in addDisease")
     addDisease(diseasesField, newDiseaseName, dispatch)
   }
@@ -34,7 +36,7 @@ export const AddVisitDiseases = (props) => {
         checklistItems={props.checklistItems}
         label={"Diseases"}
       />
-      <AddButton label={"Add Disease"} onClick={setInAddMode} />
+      <AddButton label={"Add Disease"} onClick={toggleInAddMode} />
       {inAddMode && (
         <form onSubmit={onSubmit}>
           <TextField

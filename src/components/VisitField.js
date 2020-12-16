@@ -91,9 +91,9 @@ export const VisitField = ({
           </form>
         </div>
       )}
-      {editable && (
+      {/* {editable && (
         <button onClick={() => toggleInEditFieldMode()}>Edit Field</button>
-      )}
+      )} */}
     </div>
   )
 }

@@ -1,41 +1,19 @@
-import React, { useState, useContext, useEffect } from "react"
-import VisitContext from "../contexts/visitContext"
-import { TextField } from "@material-ui/core"
+import React, { useContext } from "react"
 import MaterialUIPickers from "./DatePicker"
+import EditVisitContext from "../contexts/editVisitContext"
+import { TextField } from "@material-ui/core"
 import Checklist from "./Checklist"
-import { AddVisitDiseases } from "./AddVisitDiseases"
+import EditVisitDiseases from "./EditVisitDiseases"
 
-export const VisitFormField = ({ field }) => {
-  const [fieldValue, setFieldValue] = useState(undefined)
-  const visitContext = useContext(VisitContext)
+export const EditVisitFormField = ({ field }) => {
+  const editContext = useContext(EditVisitContext)
 
-  // useEffect(() => {
-  //   if (fieldValue != undefined) {
-  //     visitContext.updateValue(field.fieldId, fieldValue)
-  //     console.log("!= undefined")
-  //   }
-  //   console.log("fora undefined")
-  // }, [fieldValue])
-
-  // useEffect(async () => {
-  //   while (!visitContext.visitState) {
-  //     await new Promise((resolve) => setTimeout(resolve, 1000))
-  //     console.log(visitContext.visitState, "in wait field value")
-  //   }
-
-  //   let newFieldValue = visitContext.visitState[field.fieldId]
-  //   console.log(newFieldValue, "field Value")
-  //   setFieldValue(newFieldValue)
-  // }, [])
-
-  const fieldIdState = () => {
-    if (visitContext.visitState) {
-      return visitContext.visitState[field.fieldId]
-    }
+  const setFieldValue = (value) => {
+    editContext.updateValue(field.fieldId, value)
   }
 
   const handleChecklistState = (e) => {
-    let stateValue = fieldIdState()
+    let stateValue = editContext.visitState[field.fieldId]
 
     let newStateValue
     if (e.target.checked) {
@@ -49,7 +27,7 @@ export const VisitFormField = ({ field }) => {
       newStateValue = stateValue.filter((item) => item != e.target.value)
     }
 
-    visitContext.updateValue(field.fieldId, newStateValue)
+    editContext.updateValue(field.fieldId, newStateValue)
   }
 
   return (
@@ -58,11 +36,11 @@ export const VisitFormField = ({ field }) => {
         <TextField
           label={field.label.capitalize()}
           // value={fieldValue}
-          value={fieldIdState()}
+          value={editContext.visitState[field.fieldId]}
           variant="filled"
           size="small"
           onChange={(e) => {
-            // visitContext.updateValue(field.fieldId, e.target.value)
+            // editContext.updateValue(field.fieldId, e.target.value)
             setFieldValue(e.target.value)
           }}
           inputProps={{
@@ -74,20 +52,22 @@ export const VisitFormField = ({ field }) => {
         <MaterialUIPickers
           label={field.label.capitalize()}
           // selectedDate={fieldValue}
-          selectedDate={fieldIdState()}
+          selectedDate={editContext.visitState[field.fieldId]}
           setSelectedDate={setFieldValue}
           pickerId={field.label}
         />
       )}
       {field.valueType == "checklist" &&
         (field.label === "diseases" ? (
-          <AddVisitDiseases
+          <EditVisitDiseases
             handleChecklistState={handleChecklistState}
+            // checklistItems={editContext.visitState[field.fieldId]}
             checklistItems={field.checklistItems}
           />
         ) : (
           <Checklist
             handleChecklistState={handleChecklistState}
+            // checklistItems={editContext.visitState[field.fieldId]}
             checklistItems={field.checklistItems}
             label={field.label}
           />
@@ -96,4 +76,4 @@ export const VisitFormField = ({ field }) => {
   )
 }
 
-export default VisitFormField
+export default EditVisitFormField

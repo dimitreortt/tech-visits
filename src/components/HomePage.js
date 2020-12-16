@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@material-ui/core"
 import AddVisitButton from "./AddVisitButton"
-import VisitForm from "./VisitForm"
+import AddVisitForm from "./AddVisitForm"
 import LogoutButton from "./LogoutButton"
 import VisitsList from "./VisitsList"
 import AddButton from "./AddButton"
@@ -57,7 +57,7 @@ export const HomePage = () => {
               <AddVisitButton toggleShowForm={toggleShowForm} />
             </Grid>
             <Grid item xs={12}>
-              {showForm && <VisitForm toggleShowForm={toggleShowForm} />}
+              {showForm && <AddVisitForm toggleShowForm={toggleShowForm} />}
             </Grid>
             <Grid item xs={12}>
               {/* <AddFieldButton toggleInAddFieldMode={toggleInAddFieldMode} /> */}

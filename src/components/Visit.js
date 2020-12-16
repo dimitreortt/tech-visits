@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react"
-import VisitForm from "./VisitForm"
 import { useDispatch, useSelector } from "react-redux"
 import removeVisit from "../db/removeVisit"
 import VisitField from "./VisitField"
 import updateVisitEntries from "../db/updateVisitEntries"
 import { Paper, Box, Grid, Button } from "@material-ui/core"
+import EditVisitForm from "./EditVisitForm"
 
 export const Visit = ({ visit }) => {
   const [inEditMode, setInEditMode] = useState(false)
   const dispatch = useDispatch()
   const [entries, setEntries] = useState([])
-  const visitFields = useSelector(({ visitFields }) => visitFields)
+  const visitFormFields = useSelector(({ visitFields }) => visitFields)
 
   useEffect(() => {
     const entries = Object.entries(visit).filter(
@@ -18,7 +18,11 @@ export const Visit = ({ visit }) => {
     )
     setEntries(entries)
     console.log(entries, "entries")
-  }, [])
+  }, [visit])
+
+  useEffect(() => {
+    // console.log(visitFormFields, "visitFormFields")
+  }, [visitFormFields])
 
   const handleRemoveVisit = () => {
     removeVisit(visit.visitId, dispatch)
@@ -51,7 +55,7 @@ export const Visit = ({ visit }) => {
 
   const mapFieldsIdsToObjects = () => {
     let fieldsObjs = {}
-    visitFields.forEach((field) => {
+    visitFormFields.forEach((field) => {
       fieldsObjs[field.fieldId] = field
     })
     return fieldsObjs
@@ -113,10 +117,11 @@ export const Visit = ({ visit }) => {
             </Grid>
           </Grid>
           {inEditMode && (
-            <VisitForm
-              setInEditMode={setInEditMode}
-              editVisitMode={true}
+            <EditVisitForm
               entries={entries}
+              visitFormFields={visitFormFields}
+              visitId={visit.visitId}
+              toggleInEditMode={toggleInEditMode}
             />
           )}
         </Box>
