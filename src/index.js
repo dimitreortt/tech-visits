@@ -5,6 +5,7 @@ import AppRouter from "./routers/AppRouter"
 import { Provider } from "react-redux"
 import { createStore } from "redux"
 import { rootReducer } from "./reducers"
+import "./setup"
 
 const store = createStore(rootReducer)
 

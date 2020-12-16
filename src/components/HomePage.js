@@ -5,12 +5,13 @@ import {
   makeStyles,
   Paper,
   Typography,
-  Box,
 } from "@material-ui/core"
 import AddVisitButton from "./AddVisitButton"
-import AddVisitForm from "./AddVisitForm"
+import VisitForm from "./VisitForm"
 import LogoutButton from "./LogoutButton"
 import VisitsList from "./VisitsList"
+import AddButton from "./AddButton"
+import AddVisitFieldPaper from "./AddVisitFieldPaper"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +27,12 @@ const useStyles = makeStyles((theme) => ({
 
 export const HomePage = () => {
   const [showForm, setShowForm] = useState(false)
+  const [inAddFieldMode, setInAddFieldMode] = useState(false)
   const classes = useStyles()
+
+  const toggleInAddFieldMode = () => {
+    setInAddFieldMode(!inAddFieldMode)
+  }
 
   const toggleShowForm = () => {
     setShowForm(!showForm)
@@ -51,7 +57,18 @@ export const HomePage = () => {
               <AddVisitButton toggleShowForm={toggleShowForm} />
             </Grid>
             <Grid item xs={12}>
-              {showForm && <AddVisitForm toggleShowForm={toggleShowForm} />}
+              {showForm && <VisitForm toggleShowForm={toggleShowForm} />}
+            </Grid>
+            <Grid item xs={12}>
+              {/* <AddFieldButton toggleInAddFieldMode={toggleInAddFieldMode} /> */}
+              <AddButton onClick={toggleInAddFieldMode} label={"Add Field"} />
+            </Grid>
+            <Grid item xs={12}>
+              {inAddFieldMode && (
+                <AddVisitFieldPaper
+                  toggleInAddFieldMode={toggleInAddFieldMode}
+                />
+              )}
             </Grid>
             <Grid item xs={12}>
               <LogoutButton />

@@ -12,7 +12,7 @@ export const downloadFieldsContents = (dispatch) => {
       })
 
       console.log("Fields contents correctly downloaded!")
-      console.log(fieldsContents)
+      // console.log(fieldsContents)
       dispatch({ type: "SET_FIELDS", fields: fieldsContents })
     })
     .catch((e) => {

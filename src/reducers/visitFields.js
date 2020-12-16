@@ -8,10 +8,12 @@ export const visitFieldsReducer = (state = defaultVisitFields, action) => {
     case "ADD_FIELD":
       return state.concat([action.field])
     case "REMOVE_FIELD":
-      return state.filter((field) => field.fieldId != action.fieldId)
+      return state.filter((field) => field.fieldId !== action.fieldId)
     case "EDIT_FIELD":
       return state.map((field) =>
-        field.fieldId == action.fieldId ? { field, ...action.updates } : field
+        field.fieldId === action.fieldId
+          ? { ...field, ...action.updates }
+          : field
       )
     default:
       return state

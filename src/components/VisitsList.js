@@ -6,8 +6,6 @@ import { Typography } from "@material-ui/core"
 export const VisitsList = (props) => {
   const visits = useSelector(({ visits }) => visits)
 
-  console.log(visits, "to aqui no visits List")
-
   return (
     <div>
       <Typography

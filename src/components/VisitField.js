@@ -14,8 +14,6 @@ export const VisitField = ({
   const [valueInput, setValueInput] = useState("")
   const [isDateValue, setIsDateValue] = useState(null)
 
-  console.log(isDateValue, fieldValue, fieldValueType, "in Visit Field")
-
   useEffect(() => {
     if (fieldValue instanceof Date) {
       setIsDateValue(true)
@@ -46,7 +44,9 @@ export const VisitField = ({
     <div>
       <strong>{fieldLabel}: </strong>
       <span>
-        {fieldValueType == "date" && fieldValue.toLocaleDateString()}
+        {fieldValueType === "date" &&
+          !!fieldValue &&
+          fieldValue.toLocaleDateString()}
         {fieldValueType == "string" && fieldValue}
         {fieldValueType == "checklist" &&
           !!fieldValue &&
