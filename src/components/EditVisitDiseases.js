@@ -7,7 +7,7 @@ export const EditVisitDiseases = (props) => {
       <Checklist
         handleChecklistState={props.handleChecklistState}
         checklistItems={props.checklistItems}
-        // checked={props.checklistItems}
+        checkedItems={props.checkedItems}
         label={"Diseases"}
       />
     </div>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import MaterialUIPickers from "./DatePicker"
 import EditVisitContext from "../contexts/editVisitContext"
 import { TextField } from "@material-ui/core"
@@ -7,6 +7,13 @@ import EditVisitDiseases from "./EditVisitDiseases"
 
 export const EditVisitFormField = ({ field }) => {
   const editContext = useContext(EditVisitContext)
+  const [checkedItems, setCheckedItems] = useState([])
+
+  useEffect(() => {
+    if (editContext.visitState[field.fieldId]) {
+      setCheckedItems(editContext.visitState[field.fieldId])
+    }
+  }, [editContext.visitState[field.fieldId]])
 
   const setFieldValue = (value) => {
     editContext.updateValue(field.fieldId, value)
@@ -29,6 +36,12 @@ export const EditVisitFormField = ({ field }) => {
 
     editContext.updateValue(field.fieldId, newStateValue)
   }
+
+  console.log(
+    editContext.visitState[field.fieldId],
+    "editContext.visitState[field.fieldId]",
+    "in EditiVisitFormField"
+  )
 
   return (
     <div>
@@ -57,21 +70,14 @@ export const EditVisitFormField = ({ field }) => {
           pickerId={field.label}
         />
       )}
-      {field.valueType == "checklist" &&
-        (field.label === "diseases" ? (
-          <EditVisitDiseases
-            handleChecklistState={handleChecklistState}
-            // checklistItems={editContext.visitState[field.fieldId]}
-            checklistItems={field.checklistItems}
-          />
-        ) : (
-          <Checklist
-            handleChecklistState={handleChecklistState}
-            // checklistItems={editContext.visitState[field.fieldId]}
-            checklistItems={field.checklistItems}
-            label={field.label}
-          />
-        ))}
+      {field.valueType == "checklist" && (
+        <Checklist
+          handleChecklistState={handleChecklistState}
+          checkedItems={checkedItems}
+          checklistItems={field.checklistItems}
+          label={field.label}
+        />
+      )}
     </div>
   )
 }

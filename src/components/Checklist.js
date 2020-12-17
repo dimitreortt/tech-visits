@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Checkbox, FormGroup, FormControlLabel } from "@material-ui/core"
 import ListSubheader from "@material-ui/core/ListSubheader"
+import { ChecklistItem } from "./ChecklistItem"
 
 const useStyles = (theme) => ({
   subHeader: {
@@ -10,12 +11,20 @@ const useStyles = (theme) => ({
 })
 
 export const Checklist = ({
-  checklistItems,
   handleChecklistState,
+  checklistItems,
   label,
-  checked,
+  checkedItems,
 }) => {
   const classes = useStyles()
+
+  const [areChecked, setAreChecked] = useState([])
+
+  useEffect(() => {
+    setAreChecked(checkedItems)
+  }, [checkedItems])
+
+  console.log(areChecked, "areChecked")
 
   return (
     !!checklistItems && (
@@ -23,18 +32,11 @@ export const Checklist = ({
         {/* <strong>{label.capitalize()}</strong> */}
         <strong>{label.capitalize()}</strong>
         {checklistItems.map((item, index) => (
-          <FormControlLabel
+          <ChecklistItem
+            handleChecklistState={handleChecklistState}
+            isChecked={areChecked ? areChecked.includes(item) : false}
             key={index}
-            control={
-              <Checkbox
-                // checked={state.checkedA}
-                value={item}
-                onChange={handleChecklistState}
-                name={item}
-                // checked={checked.includes(item)}
-              />
-            }
-            label={item}
+            item={item}
           />
         ))}
       </FormGroup>

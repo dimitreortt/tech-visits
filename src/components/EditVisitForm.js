@@ -24,9 +24,6 @@ export const EditVisitForm = (props) => {
   const [shouldUpdate, setShouldUpdate] = useState()
   const [visitFields, setVisitFields] = useState([])
   const dispatch = useDispatch()
-  const visits = useSelector(({ visits }) => {
-    return visits
-  })
 
   useEffect(() => {
     let newState = {}
@@ -88,7 +85,6 @@ export const EditVisitForm = (props) => {
   const onSubmit = () => {
     updateVisit(visitState, props.visitId, dispatch)
     props.toggleInEditMode()
-    console.log(visits, props.visitId, "heyhey")
   }
 
   return (
