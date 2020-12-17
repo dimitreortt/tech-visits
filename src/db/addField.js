@@ -2,10 +2,12 @@ import db from "../firebase/firebase"
 
 const addField = (fieldName, valueType, dispatch, options) => {
   console.log(options, "to no add field")
-  let newField = { label: fieldName, valueType }
+  let newField = { label: fieldName.toUpperCase(), valueType }
 
   if (options.checklistItems) {
-    newField.checklistItems = options.checklistItems
+    newField.checklistItems = options.checklistItems.map((item) =>
+      item.toUpperCase()
+    )
   }
 
   db.collection("visitFormFields")

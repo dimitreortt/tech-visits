@@ -15,6 +15,9 @@ export const EditVisitFormField = ({ field }) => {
   }, [editContext.visitState[field.fieldId]])
 
   const setFieldValue = (value) => {
+    if (value instanceof String) {
+      value = value.toUpperCase()
+    }
     editContext.updateValue(field.fieldId, value)
   }
 
@@ -46,7 +49,7 @@ export const EditVisitFormField = ({ field }) => {
     <div>
       {field.valueType == "string" && (
         <TextField
-          label={field.label.capitalize()}
+          label={field.label}
           // value={fieldValue}
           value={editContext.visitState[field.fieldId]}
           variant="filled"
@@ -62,7 +65,7 @@ export const EditVisitFormField = ({ field }) => {
       )}
       {field.valueType == "date" && (
         <MaterialUIPickers
-          label={field.label.capitalize()}
+          label={field.label}
           // selectedDate={fieldValue}
           selectedDate={editContext.visitState[field.fieldId]}
           setSelectedDate={setFieldValue}

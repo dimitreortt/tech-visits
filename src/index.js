@@ -3,10 +3,6 @@ import ReactDOM from "react-dom"
 import reportWebVitals from "./reportWebVitals"
 import AppRouter from "./routers/AppRouter"
 import { Provider } from "react-redux"
-import { createStore } from "redux"
-import { rootReducer } from "./reducers"
-import { composeWithDevTools } from "redux-devtools-extension"
-import "./setup"
 import configureStore from "./store/configureStore"
 
 // const store = createStore(rootReducer, composeWithDevTools())

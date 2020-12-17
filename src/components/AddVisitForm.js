@@ -73,6 +73,19 @@ export const AddVisitForm = (props) => {
     }
 
     let visitObj = { ...visitState, fieldId }
+
+    let upperCasedEntries = Object.entries(visitObj).map(([key, value]) => {
+      if (value instanceof String) {
+        return [key, value.toUpperCase()]
+      }
+      return [key, value]
+    })
+
+    visitObj = {}
+    upperCasedEntries.forEach(([key, value]) => {
+      visitObj[key] = value
+    })
+
     db.collection("visits")
       .add(visitObj)
       .then((docRef) => {

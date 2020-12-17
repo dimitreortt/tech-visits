@@ -21,18 +21,6 @@ export const AddVisitFieldPaper = (props) => {
   )
   const dispatch = useDispatch()
 
-  const onTypeChange = (e) => {
-    console.log(e.target.value, "lasdasdasdojn")
-    if (e.target.value == "date") {
-      setFieldValue(Date.now())
-    } else if (e.target.value == "string") {
-      setFieldValue("")
-    } else if (e.target.value == "checklist") {
-      setFieldValue([])
-    }
-    setValueType(e.target.value)
-  }
-
   const onFormSubmit = (e) => {
     e.preventDefault()
 
@@ -101,16 +89,6 @@ export const AddVisitFieldPaper = (props) => {
           ></input>
         </div>
       )}
-      {/* {valueType == "date" && (
-        <>
-          <label htmlFor="dateInput">Field Name:</label>
-          <DatePicker
-            selected={fieldValue}
-            onChange={(date) => setFieldValue(date)}
-            id="dateInput"
-          />
-        </>
-      )} */}
       {valueType == "checklist" && (
         <>
           {checklistItems.map((item, index) => (
@@ -126,16 +104,6 @@ export const AddVisitFieldPaper = (props) => {
           ))}
           {showAddChecklistItemField && (
             <>
-              {/* <label htmlFor="value">Item Name:</label>
-              <input
-                id="value"
-                type="text"
-                value={newChecklistItemName}
-                placeholder="Enter item name"
-                onChange={(e) => {
-                  setNewChecklistItemName(e.target.value)
-                }}
-              ></input> */}
               <TextField
                 variant="filled"
                 label={"Checklist Item Name"}
@@ -150,12 +118,8 @@ export const AddVisitFieldPaper = (props) => {
                   style: { textTransform: "capitalize" },
                 }}
               />
-              {/* <button type="button" onClick={addCheckListItem}>
-                Save
-              </button> */}
               <Button
                 variant="outlined"
-                // variant="contained"
                 color="primary"
                 size="small"
                 onClick={addCheckListItem}
@@ -171,13 +135,11 @@ export const AddVisitFieldPaper = (props) => {
             onClick={() =>
               setShowAddChecklistItemField(!showAddChecklistItemField)
             }
-            // fullWidth
           >
             {!showAddChecklistItemField ? "Add Item" : <CancelIcon />}
           </Button>
         </>
       )}
-      {/* <button type="submit">Save</button> */}
       <div>
         <SubmitButton />
       </div>

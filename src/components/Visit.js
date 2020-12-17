@@ -32,27 +32,6 @@ export const Visit = ({ visit }) => {
     setInEditMode(!inEditMode)
   }
 
-  const dispatchWithPrivateFields = (newEntries) => {
-    const privateFields = [["fieldId", visit.fieldId]]
-    updateVisitEntries(
-      newEntries.concat(privateFields),
-      visit.visitId,
-      dispatch
-    )
-  }
-
-  const editField = (oldKey, newKey, newValue) => {
-    let newEntries = entries.map(([key, value]) => {
-      if (key == oldKey) {
-        return [newKey, newValue]
-      }
-      return [key, value]
-    })
-
-    setEntries(newEntries)
-    dispatchWithPrivateFields(newEntries)
-  }
-
   const mapFieldsIdsToObjects = () => {
     let fieldsObjs = {}
     visitFormFields.forEach((field) => {
@@ -80,10 +59,9 @@ export const Visit = ({ visit }) => {
               return (
                 <Grid item xs={12} key={fieldId}>
                   <VisitField
-                    editField={editField}
                     fieldValue={value}
                     fieldValueType={fieldObj.valueType}
-                    fieldLabel={fieldObj.label.capitalize()}
+                    fieldLabel={fieldObj.label}
                     editable={!fieldObj.isDefault}
                   />
                 </Grid>
