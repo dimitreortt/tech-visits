@@ -3,7 +3,6 @@ import MaterialUIPickers from "./DatePicker"
 import EditVisitContext from "../contexts/editVisitContext"
 import { TextField } from "@material-ui/core"
 import Checklist from "./Checklist"
-import EditVisitDiseases from "./EditVisitDiseases"
 
 export const EditVisitFormField = ({ field }) => {
   const editContext = useContext(EditVisitContext)
