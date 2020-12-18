@@ -24,13 +24,11 @@ export const Checklist = ({
     setAreChecked(checkedItems)
   }, [checkedItems])
 
-  console.log(areChecked, "areChecked")
-
   return (
     !!checklistItems && (
       <FormGroup>
         {/* <strong>{label.capitalize()}</strong> */}
-        <strong>{label.capitalize()}</strong>
+        <strong>{label}</strong>
         {checklistItems.map((item, index) => (
           <ChecklistItem
             handleChecklistState={handleChecklistState}

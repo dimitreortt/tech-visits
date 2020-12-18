@@ -9,8 +9,6 @@ export const AddVisitFormField = ({ field }) => {
   // const [fieldValue, setFieldValue] = useState(undefined)
   const visitContext = useContext(VisitContext)
 
-  console.log(visitContext, visitContext.visitState, "add field")
-
   const fieldIdState = () => {
     if (visitContext.visitState) {
       return visitContext.visitState[field.fieldId]
@@ -36,6 +34,9 @@ export const AddVisitFormField = ({ field }) => {
   }
 
   const setFieldValue = (value) => {
+    if (typeof value === "string") {
+      value = value.toUpperCase()
+    }
     visitContext.updateValue(field.fieldId, value)
   }
 
@@ -43,23 +44,22 @@ export const AddVisitFormField = ({ field }) => {
     <div>
       {field.valueType == "string" && (
         <TextField
-          label={field.label.capitalize()}
+          label={field.label.toUpperCase()}
           // value={fieldValue}
           value={visitContext.visitState[field.fieldId]}
           variant="filled"
           size="small"
           onChange={(e) => {
-            // visitContext.updateValue(field.fieldId, e.target.value)
             setFieldValue(e.target.value)
           }}
-          inputProps={{
-            style: { textTransform: "capitalize" },
-          }}
+          // inputProps={{
+          //   style: { textTransform: "capitalize" },
+          // }}
         />
       )}
       {field.valueType == "date" && (
         <MaterialUIPickers
-          label={field.label.capitalize()}
+          label={field.label.toUpperCase()}
           // selectedDate={fieldValue}
           selectedDate={visitContext.visitState[field.fieldId]}
           setSelectedDate={setFieldValue}
@@ -67,16 +67,18 @@ export const AddVisitFormField = ({ field }) => {
         />
       )}
       {field.valueType == "checklist" &&
-        (field.label === "diseases" ? (
+        (field.label === "DISEASES" ? (
           <AddVisitDiseases
             handleChecklistState={handleChecklistState}
             checklistItems={field.checklistItems}
+            checkedItems={visitContext.visitState[field.fieldId]}
           />
         ) : (
           <Checklist
             handleChecklistState={handleChecklistState}
             checklistItems={field.checklistItems}
-            label={field.label}
+            label={field.label.toUpperCase()}
+            checkedItems={visitContext.visitState[field.fieldId]}
           />
         ))}
     </div>

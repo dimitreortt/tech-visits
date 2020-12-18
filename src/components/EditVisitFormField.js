@@ -15,7 +15,7 @@ export const EditVisitFormField = ({ field }) => {
   }, [editContext.visitState[field.fieldId]])
 
   const setFieldValue = (value) => {
-    if (value instanceof String) {
+    if (typeof value === "string") {
       value = value.toUpperCase()
     }
     editContext.updateValue(field.fieldId, value)
@@ -39,12 +39,6 @@ export const EditVisitFormField = ({ field }) => {
     editContext.updateValue(field.fieldId, newStateValue)
   }
 
-  console.log(
-    editContext.visitState[field.fieldId],
-    "editContext.visitState[field.fieldId]",
-    "in EditiVisitFormField"
-  )
-
   return (
     <div>
       {field.valueType == "string" && (
@@ -57,9 +51,6 @@ export const EditVisitFormField = ({ field }) => {
           onChange={(e) => {
             // editContext.updateValue(field.fieldId, e.target.value)
             setFieldValue(e.target.value)
-          }}
-          inputProps={{
-            style: { textTransform: "capitalize" },
           }}
         />
       )}

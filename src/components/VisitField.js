@@ -6,7 +6,6 @@ export const VisitField = ({
   fieldLabel,
   fieldValue,
   editField,
-  editable,
   fieldValueType,
 }) => {
   const [inEditFieldMode, setInEditFieldMode] = useState(false)
@@ -42,7 +41,7 @@ export const VisitField = ({
 
   return (
     <div>
-      <strong>{fieldLabel}: </strong>
+      <strong>{fieldLabel.toUpperCase()}: </strong>
       <span>
         {fieldValueType === "date" &&
           !!fieldValue &&

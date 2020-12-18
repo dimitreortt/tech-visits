@@ -75,7 +75,9 @@ export const EditVisitForm = (props) => {
   }, [shouldUpdate])
 
   useEffect(() => {
-    console.log(visitFields, visitState, "visitState edit visit")
+    if (process.env.NODE_ENV === "development") {
+      console.log(visitFields, visitState, "visitState edit visit")
+    }
   }, [visitState])
 
   const updateValue = (key, val) => {

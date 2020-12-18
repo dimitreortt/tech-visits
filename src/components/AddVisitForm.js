@@ -43,7 +43,9 @@ export const AddVisitForm = (props) => {
   }, [visitFormFields])
 
   useEffect(() => {
-    console.log(visitFieldsIds, visitState, "visitState")
+    if (process.env.NODE_ENV === "development") {
+      // console.log(visitFieldsIds, visitState, "visitState")
+    }
   }, [visitState])
 
   const updateValue = (key, val) => {
