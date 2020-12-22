@@ -2,7 +2,7 @@
 
 ##### Url
 
-https://tech-visits.web.app/coopasvtech/\<field-id\>
+https://tech-visits.web.app/coopasvtech/>your-field-id<
 
 ##### Login
 
