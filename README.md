@@ -2,10 +2,9 @@
 
 ##### Url
 
-https://tech-visits.web.app/coopasvtech/>your-field-id<
+> https://tech-visits.web.app/coopasvtech/-your-field-id-
 
 ##### Login
 
-User: **niceuser@email.com**
-
+> User: **niceuser@email.com**   
 Password: **strongpassword**
