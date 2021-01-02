@@ -2,7 +2,7 @@ import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import VisitsApp from "../components/VisitsApp"
 import PrivateRoute from "./PrivateRoute"
-import NotFoundPage from "../components/NotFoundPage"
+import NotFoundPage from "../pages/NotFoundPage"
 
 export const AppRouter = (props) => {
   console.log("to no app routers")

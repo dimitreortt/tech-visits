@@ -6,7 +6,7 @@ import downloadFieldsContents from "../db/downloadFieldsContents"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../materialUI/theme"
-import { HomePage } from "./HomePage"
+import { HomePage } from "../pages/HomePage"
 
 export const VisitsApp = () => {
   const dispatch = useDispatch()

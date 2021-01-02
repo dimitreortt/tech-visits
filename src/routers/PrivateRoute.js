@@ -2,7 +2,7 @@ import React from "react"
 import useIsLoggedIn from "../customHooks/useIsLoggedIn"
 import { Redirect, Route } from "react-router-dom"
 import { useSelector } from "react-redux"
-import LoginPage from "../components/LoginPage"
+import LoginPage from "../pages/LoginPage"
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   const [loading] = useIsLoggedIn()

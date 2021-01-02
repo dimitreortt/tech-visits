@@ -6,12 +6,12 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core"
-import AddVisitButton from "./AddVisitButton"
-import AddVisitForm from "./AddVisitForm"
-import LogoutButton from "./LogoutButton"
-import VisitsList from "./VisitsList"
-import AddButton from "./AddButton"
-import AddVisitFieldPaper from "./AddVisitFieldPaper"
+import AddVisitButton from "../components/AddVisitButton"
+import AddVisitForm from "../components/AddVisitForm"
+import LogoutButton from "../components/LogoutButton"
+import VisitsList from "../components/VisitsList"
+import AddButton from "../components/AddButton"
+import AddVisitFieldPaper from "../components/AddVisitFieldPaper"
 
 const useStyles = makeStyles((theme) => ({
   root: {
