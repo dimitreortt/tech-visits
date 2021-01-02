@@ -11,7 +11,7 @@ export const AddVisitDiseases = (props) => {
   const [newDiseaseName, setNewDiseaseName] = useState("")
   const dispatch = useDispatch()
   const diseasesField = useSelector(({ visitFields }) =>
-    visitFields.find((field) => field.label === "DISEASES")
+    visitFields.find((field) => field.label === "DOENÇAS")
   )
 
   const toggleInAddMode = () => {
@@ -34,7 +34,7 @@ export const AddVisitDiseases = (props) => {
       <Checklist
         handleChecklistState={props.handleChecklistState}
         checklistItems={props.checklistItems}
-        label={"Diseases"}
+        label={"DOENÇAS"}
         checkedItems={props.checkedItems}
       />
       <AddButton label={"Add Disease"} onClick={toggleInAddMode} />

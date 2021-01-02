@@ -1,7 +1,7 @@
 import db from "../firebase/firebase"
 
 export const addDisease = (diseasesField, newDiseaseName, dispatch) => {
-  console.log(diseasesField, "in addDisease")
+  newDiseaseName = newDiseaseName.toUpperCase()
   let newDiseasesList = diseasesField.checklistItems.concat([newDiseaseName])
   const updates = { checklistItems: newDiseasesList }
   db.collection("visitFormFields")

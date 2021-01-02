@@ -67,7 +67,7 @@ export const AddVisitFormField = ({ field }) => {
         />
       )}
       {field.valueType == "checklist" &&
-        (field.label === "DISEASES" ? (
+        (field.label === "DOENÇAS" ? (
           <AddVisitDiseases
             handleChecklistState={handleChecklistState}
             checklistItems={field.checklistItems}
