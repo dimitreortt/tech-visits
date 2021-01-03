@@ -12,9 +12,9 @@ export const SubmitButton = (props) => {
         type="submit"
         size="small"
         onClick={props.onClick}
-        // fullWidth
+        fullWidth
       >
-        Save
+        SALVAR
       </Button>
     </div>
   )

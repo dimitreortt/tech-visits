@@ -18,11 +18,12 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
       {new Date().getFullYear()}
-      {"."}
+      {".  "}
+      <Link color="inherit" href="http://coopasv.com/">
+      COOPASV | We are coffee, for sure.
+      </Link>{" "}
+     
     </Typography>
   )
 }
@@ -76,11 +77,17 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+        <Typography variant="h5">
+         COOPASVTech
+        </Typography>
+        <Typography variant="h4">
+         VISITAS TÉCNICAS
+        </Typography>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          ENTRAR
         </Typography>
         <form className={classes.form} noValidate onSubmit={onFormSubmit}>
           <TextField
@@ -116,7 +123,7 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            ENTRAR
           </Button>
           <Grid container>
             <Grid item xs>

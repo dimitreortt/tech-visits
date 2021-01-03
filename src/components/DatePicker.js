@@ -37,6 +37,7 @@ export const MaterialUIPickers = ({
           KeyboardButtonProps={{
             "aria-label": "change date",
           }}
+          fullWidth
         />
       </Grid>
     </MuiPickersUtilsProvider>
