@@ -1,8 +1,11 @@
-import React from "react"
+import React, {Fragment} from "react"
 import useIsLoggedIn from "../customHooks/useIsLoggedIn"
 import { Redirect, Route } from "react-router-dom"
 import { useSelector } from "react-redux"
 import LoginPage from "../pages/LoginPage"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles"
+import { theme } from "../materialUI/theme"
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   const [loading] = useIsLoggedIn()
@@ -19,7 +22,12 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
         ) : userId ? (
           <Component {...props} />
         ) : (
-          <LoginPage />
+          <Fragment>
+          <CssBaseline />
+            <MuiThemeProvider theme={theme}>
+                <LoginPage />
+            </MuiThemeProvider>
+          </ Fragment>
         )
       }
     />

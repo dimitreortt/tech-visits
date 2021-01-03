@@ -53,6 +53,7 @@ export const AddVisitFormField = ({ field }) => {
           onChange={(e) => {
             setFieldValue(e.target.value)
           }}
+          fullWidth
           // inputProps={{
           //   style: { textTransform: "capitalize" },
           // }}

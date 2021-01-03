@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, Fragment } from "react"
 import {
   Container,
   Grid,
@@ -12,11 +12,13 @@ import LogoutButton from "../components/LogoutButton"
 import VisitsList from "../components/VisitsList"
 import AddButton from "../components/AddButton"
 import AddVisitFieldPaper from "../components/AddVisitFieldPaper"
+import Navbar from '../components/navbar/Navbar'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     padding: theme.spacing(1),
+    // backgroundColor: "purple"
   },
   paper: {
     padding: theme.spacing(2),
@@ -39,7 +41,9 @@ export const HomePage = () => {
   }
 
   return (
-    <Container maxWidth="md" className={classes.root}>
+    <Fragment>
+   <Navbar />
+    <Container maxWidth="lg" className={classes.root}>
       <Grid container spacing={1} justify="space-around">
         <Grid item xs={12} sm={4}>
           <Grid container spacing={1}>
@@ -54,7 +58,7 @@ export const HomePage = () => {
               </Paper>
             </Grid>
             <Grid item xs={12}>
-              <AddVisitButton toggleShowForm={toggleShowForm} />
+              <AddVisitButton toggleShowForm={toggleShowForm}  isFormShowing={showForm}/>
             </Grid>
             <Grid item xs={12}>
               {showForm && <AddVisitForm toggleShowForm={toggleShowForm} />}
@@ -70,9 +74,9 @@ export const HomePage = () => {
                 />
               )}
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <LogoutButton />
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
         <Grid item xs={12} sm={6} spacing={1}>
@@ -80,5 +84,6 @@ export const HomePage = () => {
         </Grid>
       </Grid>
     </Container>
+    </Fragment>
   )
 }

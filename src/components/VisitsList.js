@@ -13,13 +13,12 @@ export const VisitsList = (props) => {
   return (
     <div>
       <Typography
-        variant="h3"
-        component="h2"
+        variant="h5"
         gutterBottom
-        color="primary"
+        // color="primary"
         align="center"
       >
-        Visits List
+        VISITAS TÉCNICAS
       </Typography>
       {!!visits &&
         visits.map((visit, index) => <Visit key={index} visit={visit} />)}
