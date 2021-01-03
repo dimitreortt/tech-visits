@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Checkbox, FormGroup, FormControlLabel } from "@material-ui/core"
+import React from "react"
+import { Checkbox, FormControlLabel } from "@material-ui/core"
 
 export const ChecklistItem = ({ handleChecklistState, item, isChecked }) => {
   return (

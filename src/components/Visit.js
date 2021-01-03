@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import removeVisit from "../db/removeVisit"
 import VisitField from "./VisitField"
-import updateVisitEntries from "../db/updateVisitEntries"
 import { Paper, Box, Grid, Button } from "@material-ui/core"
 import EditVisitForm from "./EditVisitForm"
 
@@ -14,7 +13,7 @@ export const Visit = ({ visit }) => {
 
   useEffect(() => {
     const entries = Object.entries(visit).filter(
-      ([key, value]) => key != "visitId" && key != "fieldId"
+      ([key, value]) => key !== "visitId" && key !== "fieldId"
     )
     setEntries(entries)
     console.log(entries, "entries")
@@ -53,7 +52,7 @@ export const Visit = ({ visit }) => {
             {entries.map(([fieldId, value]) => {
               const fieldObj = fieldIdToObj(fieldId)
               if (!fieldObj) {
-                return
+                return undefined
               }
 
               return (
