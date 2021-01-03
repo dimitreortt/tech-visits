@@ -56,7 +56,7 @@ export const AddVisitForm = (props) => {
     // VERIFICAR SE OS REQUERIMENTOS SÃO ATENDIDOS
     let errorMessage = ""
     visitFormFields.forEach((field) => {
-      if (field.required && visitState[field.fieldId] == "") {
+      if (field.required && visitState[field.fieldId] === "") {
         errorMessage += "Field " + field.label + " is required!\n"
       }
     })

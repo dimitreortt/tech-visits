@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { Checkbox, FormGroup, FormControlLabel } from "@material-ui/core"
-import ListSubheader from "@material-ui/core/ListSubheader"
+import { FormGroup } from "@material-ui/core"
 import { ChecklistItem } from "./ChecklistItem"
-
-const useStyles = (theme) => ({
-  subHeader: {
-    padding: 0,
-    "margin-top": "10px",
-  },
-})
 
 export const Checklist = ({
   handleChecklistState,
@@ -16,8 +8,6 @@ export const Checklist = ({
   label,
   checkedItems,
 }) => {
-  const classes = useStyles()
-
   const [areChecked, setAreChecked] = useState([])
 
   useEffect(() => {
