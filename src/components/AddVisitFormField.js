@@ -4,6 +4,7 @@ import { TextField } from "@material-ui/core"
 import MaterialUIPickers from "./DatePicker"
 import Checklist from "./Checklist"
 import { AddVisitDiseases } from "./AddVisitDiseases"
+import { AddVisitPlagues } from "./AddVisitPlagues"
 
 export const AddVisitFormField = ({ field }) => {
   // const [fieldValue, setFieldValue] = useState(undefined)
@@ -69,6 +70,12 @@ export const AddVisitFormField = ({ field }) => {
       {field.valueType == "checklist" &&
         (field.label === "DOENÇAS" ? (
           <AddVisitDiseases
+            handleChecklistState={handleChecklistState}
+            checklistItems={field.checklistItems}
+            checkedItems={visitContext.visitState[field.fieldId]}
+          />
+        ) : field.label === "PRAGAS" ? (
+          <AddVisitPlagues
             handleChecklistState={handleChecklistState}
             checklistItems={field.checklistItems}
             checkedItems={visitContext.visitState[field.fieldId]}
