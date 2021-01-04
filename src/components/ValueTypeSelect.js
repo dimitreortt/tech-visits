@@ -20,12 +20,23 @@ export const ValueTypeSelect = ({ typeOptions, valueType, setValueType }) => {
   // const [valueType, setValueType] = useState("string")
 
   const handleChange = (event) => {
+    // let value
+    // if (event.target.value === "Texto") {
+    //   value = "string"
+    // } else if (event.target.value === "Data") {
+    //   value = "date"
+    // } else if (event.target.value === "Lista") {
+    //   value = "checklist"
+    // }
+    // setValueType(value)
     setValueType(event.target.value)
   }
 
   return (
     <FormControl variant="filled" className={classes.formControl}>
-      <InputLabel id="demo-simple-select-filled-label">Value Type</InputLabel>
+      <InputLabel id="demo-simple-select-filled-label">
+        Tipo de Campo
+      </InputLabel>
       <Select
         fullWidth
         labelId="demo-simple-select-filled-label"
