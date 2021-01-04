@@ -37,11 +37,11 @@ export const AddVisitPlagues = (props) => {
         label={"DOENÇAS"}
         checkedItems={props.checkedItems}
       />
-      <AddButton label={"Add Plague"} onClick={toggleInAddMode} />
+      <AddButton label={"Adicionar Praga"} onClick={toggleInAddMode} />
       {inAddMode && (
         <form onSubmit={onSubmit}>
           <TextField
-            label={"New Plague"}
+            label={"NOVA PRAGA"}
             value={newPlagueName}
             variant="filled"
             size="small"

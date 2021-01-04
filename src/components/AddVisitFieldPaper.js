@@ -14,12 +14,24 @@ export const AddVisitFieldPaper = (props) => {
   const [fieldLabel, setFieldLabel] = useState("")
   const [fieldValue, setFieldValue] = useState("")
   const [newChecklistItemName, setNewChecklistItemName] = useState("")
-  const [valueType, setValueType] = useState("string")
+  const [valueType, setValueType] = useState("Texto")
   const [checklistItems, setChecklistItems] = useState([])
   const [showAddChecklistItemField, setShowAddChecklistItemField] = useState(
     false
   )
   const dispatch = useDispatch()
+
+  const translateValueType = () => {
+    let value
+    if (valueType === "Texto") {
+      value = "string"
+    } else if (valueType === "Data") {
+      value = "date"
+    } else if (valueType === "Lista") {
+      value = "checklist"
+    }
+    return value
+  }
 
   const onFormSubmit = (e) => {
     e.preventDefault()
@@ -27,19 +39,19 @@ export const AddVisitFieldPaper = (props) => {
     console.log(fieldLabel, fieldValue)
 
     if (!fieldLabel) {
-      return alert("Field label can't be empty!")
+      return alert("Nome do campo não pode ser vazio!")
     }
 
     if (fieldsLabels.includes(fieldLabel)) {
-      return alert("This field already exists!")
+      return alert("Um campo com este nome já existe!")
     }
-
+    let translatedValueType = translateValueType()
     let options = {}
-    if (valueType === "checklist") {
+    if (translatedValueType === "checklist") {
       options.checklistItems = checklistItems
     }
 
-    addField(fieldLabel, valueType, dispatch, options)
+    addField(fieldLabel, translatedValueType, dispatch, options)
     props.toggleInAddFieldMode()
   }
 
@@ -56,14 +68,14 @@ export const AddVisitFieldPaper = (props) => {
   return (
     <form onSubmit={onFormSubmit}>
       <ValueTypeSelect
-        typeOptions={["string", "date", "checklist"]}
+        typeOptions={["Texto", "Data", "Lista"]}
         valueType={valueType}
         setValueType={setValueType}
       />
       <div>
         <TextField
           variant="filled"
-          label={"Field Name"}
+          label={"Nome do Campo"}
           fullWidth
           value={fieldLabel}
           onChange={(e) => {
@@ -89,7 +101,7 @@ export const AddVisitFieldPaper = (props) => {
           ></input>
         </div>
       )}
-      {valueType == "checklist" && (
+      {valueType == "Lista" && (
         <>
           {checklistItems.map((item, index) => (
             <div key={index}>
@@ -106,7 +118,7 @@ export const AddVisitFieldPaper = (props) => {
             <>
               <TextField
                 variant="filled"
-                label={"Checklist Item Name"}
+                label={"Nome do Item"}
                 // fullWidth
                 size={"small"}
                 value={newChecklistItemName}
@@ -124,7 +136,7 @@ export const AddVisitFieldPaper = (props) => {
                 size="small"
                 onClick={addCheckListItem}
               >
-                Save Item
+                Salvar Item
               </Button>
             </>
           )}
@@ -136,7 +148,7 @@ export const AddVisitFieldPaper = (props) => {
               setShowAddChecklistItemField(!showAddChecklistItemField)
             }
           >
-            {!showAddChecklistItemField ? "Add Item" : <CancelIcon />}
+            {!showAddChecklistItemField ? "Adicionar Item" : <CancelIcon />}
           </Button>
         </>
       )}
