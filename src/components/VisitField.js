@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import DatePicker from "react-datepicker"
-import { TextField } from "@material-ui/core"
 
 export const VisitField = ({
   fieldLabel,
@@ -46,8 +45,8 @@ export const VisitField = ({
         {fieldValueType === "date" &&
           !!fieldValue &&
           fieldValue.toLocaleDateString()}
-        {fieldValueType == "string" && fieldValue}
-        {fieldValueType == "checklist" &&
+        {fieldValueType === "string" && fieldValue}
+        {fieldValueType === "checklist" &&
           !!fieldValue &&
           fieldValue.map((value, index) => (
             <React.Fragment key={index}>

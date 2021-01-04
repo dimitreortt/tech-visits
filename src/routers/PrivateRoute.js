@@ -1,6 +1,6 @@
-import React, {Fragment} from "react"
+import React, { Fragment } from "react"
 import useIsLoggedIn from "../customHooks/useIsLoggedIn"
-import { Redirect, Route } from "react-router-dom"
+import { Route } from "react-router-dom"
 import { useSelector } from "react-redux"
 import LoginPage from "../pages/LoginPage"
 import CssBaseline from "@material-ui/core/CssBaseline"
@@ -23,11 +23,11 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
           <Component {...props} />
         ) : (
           <Fragment>
-          <CssBaseline />
+            <CssBaseline />
             <MuiThemeProvider theme={theme}>
-                <LoginPage />
+              <LoginPage />
             </MuiThemeProvider>
-          </ Fragment>
+          </Fragment>
         )
       }
     />

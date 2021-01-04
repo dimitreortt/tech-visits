@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import VisitContext from "../contexts/visitContext"
 import { TextField } from "@material-ui/core"
 import MaterialUIPickers from "./DatePicker"
@@ -28,7 +28,7 @@ export const AddVisitFormField = ({ field }) => {
           : [e.target.value]
     } else {
       console.log(e.target.value, "has been unchecked")
-      newStateValue = stateValue.filter((item) => item != e.target.value)
+      newStateValue = stateValue.filter((item) => item !== e.target.value)
     }
 
     visitContext.updateValue(field.fieldId, newStateValue)
@@ -43,7 +43,7 @@ export const AddVisitFormField = ({ field }) => {
 
   return (
     <div>
-      {field.valueType == "string" && (
+      {field.valueType === "string" && (
         <TextField
           label={field.label.toUpperCase()}
           // value={fieldValue}
@@ -59,7 +59,7 @@ export const AddVisitFormField = ({ field }) => {
           // }}
         />
       )}
-      {field.valueType == "date" && (
+      {field.valueType === "date" && (
         <MaterialUIPickers
           label={field.label.toUpperCase()}
           // selectedDate={fieldValue}
@@ -68,7 +68,7 @@ export const AddVisitFormField = ({ field }) => {
           pickerId={field.label}
         />
       )}
-      {field.valueType == "checklist" &&
+      {field.valueType === "checklist" &&
         (field.label === "DOENÇAS" ? (
           <AddVisitDiseases
             handleChecklistState={handleChecklistState}

@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import DatePicker from "react-datepicker"
 import { useSelector, useDispatch } from "react-redux"
 import addField from "../db/addField"
 import ValueTypeSelect from "./ValueTypeSelect"
@@ -87,7 +86,7 @@ export const AddVisitFieldPaper = (props) => {
           }}
         />
       </div>
-      {valueType == "text" && (
+      {valueType === "text" && (
         <div>
           <label htmlFor="value">Field Value:</label>
           <input
@@ -101,7 +100,7 @@ export const AddVisitFieldPaper = (props) => {
           ></input>
         </div>
       )}
-      {valueType == "Lista" && (
+      {valueType === "Lista" && (
         <>
           {checklistItems.map((item, index) => (
             <div key={index}>

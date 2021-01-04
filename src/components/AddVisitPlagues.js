@@ -34,7 +34,7 @@ export const AddVisitPlagues = (props) => {
       <Checklist
         handleChecklistState={props.handleChecklistState}
         checklistItems={props.checklistItems}
-        label={"DOENÇAS"}
+        label={"PRAGAS"}
         checkedItems={props.checkedItems}
       />
       <AddButton label={"Adicionar Praga"} onClick={toggleInAddMode} />

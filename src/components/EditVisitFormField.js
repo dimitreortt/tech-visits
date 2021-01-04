@@ -33,7 +33,7 @@ export const EditVisitFormField = ({ field }) => {
           : [e.target.value]
     } else {
       console.log(e.target.value, "has been unchecked")
-      newStateValue = stateValue.filter((item) => item != e.target.value)
+      newStateValue = stateValue.filter((item) => item !== e.target.value)
     }
 
     editContext.updateValue(field.fieldId, newStateValue)
@@ -41,7 +41,7 @@ export const EditVisitFormField = ({ field }) => {
 
   return (
     <div>
-      {field.valueType == "string" && (
+      {field.valueType === "string" && (
         <TextField
           label={field.label}
           // value={fieldValue}
@@ -54,7 +54,7 @@ export const EditVisitFormField = ({ field }) => {
           }}
         />
       )}
-      {field.valueType == "date" && (
+      {field.valueType === "date" && (
         <MaterialUIPickers
           label={field.label}
           // selectedDate={fieldValue}
@@ -63,7 +63,7 @@ export const EditVisitFormField = ({ field }) => {
           pickerId={field.label}
         />
       )}
-      {field.valueType == "checklist" && (
+      {field.valueType === "checklist" && (
         <Checklist
           handleChecklistState={handleChecklistState}
           checkedItems={checkedItems}
