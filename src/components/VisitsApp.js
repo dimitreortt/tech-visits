@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import downloadVisits from "../db/downloadVisits"
 import downloadFieldsContents from "../db/downloadFieldsContents"
+import downloadFarmAndGrowerInfo from '../db/downloadFarmAndGrowerInfo'
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../materialUI/theme"
@@ -15,6 +16,7 @@ export const VisitsApp = () => {
 
   useEffect(() => {
     if (fieldId) {
+      downloadFarmAndGrowerInfo(fieldId, dispatch)
       downloadVisits(fieldId, dispatch)
       downloadFieldsContents(dispatch)
     }
