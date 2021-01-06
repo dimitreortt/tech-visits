@@ -10,6 +10,7 @@ export const AddVisitFieldPaper = (props) => {
   const fieldsLabels = useSelector(({ visitFields }) =>
     visitFields.map((field) => field.label)
   )
+  const fieldsOrder = useSelector(({ fieldsOrder }) => fieldsOrder)
   const [fieldLabel, setFieldLabel] = useState("")
   const [fieldValue, setFieldValue] = useState("")
   const [newChecklistItemName, setNewChecklistItemName] = useState("")
@@ -50,7 +51,7 @@ export const AddVisitFieldPaper = (props) => {
       options.checklistItems = checklistItems
     }
 
-    addField(fieldLabel, translatedValueType, dispatch, options)
+    addField(fieldLabel, translatedValueType, dispatch, options, fieldsOrder)
     props.toggleInAddFieldMode()
   }
 
