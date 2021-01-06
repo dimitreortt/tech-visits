@@ -29,6 +29,7 @@ export const MaterialUIPickers = ({
           format="MM/dd/yyyy"
           margin="normal"
           id={pickerId}
+          autoOk={true}
           label={label}
           value={selectedDate === "" ? null : selectedDate}
           // value={selectedDate}
