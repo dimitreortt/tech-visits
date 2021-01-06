@@ -4,7 +4,12 @@ import Visit from "./Visit"
 import { Typography } from "@material-ui/core"
 
 export const VisitsList = (props) => {
-  const visits = useSelector(({ visits }) => visits)
+  const visits = useSelector(({ visits, ids }) => {
+    const compareNewest = (visit1, visit2) => {
+      return visit2[ids.visitDateFieldId] - visit1[ids.visitDateFieldId]
+    }
+    return visits.sort(compareNewest)
+  })
 
   useEffect(() => {
     console.log(visits, "visits mudou")
