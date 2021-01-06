@@ -27,6 +27,7 @@ export const AddVisitPlagues = (props) => {
 
     console.log(newPlagueName, "in addDisease")
     addPlague(diseasesField, newPlagueName, dispatch)
+    toggleInAddMode()
   }
 
   return (
@@ -53,6 +54,7 @@ export const AddVisitPlagues = (props) => {
               style: { textTransform: "capitalize" },
             }}
           />
+          {/* <SubmitButton onClick={toggleInAddMode} /> */}
           <SubmitButton />
         </form>
       )}

@@ -16,7 +16,7 @@ export const Visit = ({ visit }) => {
       ([key, value]) => key !== "visitId" && key !== "fieldId"
     )
     setEntries(entries)
-    console.log(entries, "entries")
+    // console.log(entries, "entries")
   }, [visit])
 
   useEffect(() => {

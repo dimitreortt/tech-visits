@@ -27,6 +27,7 @@ export const AddVisitDiseases = (props) => {
 
     console.log(newDiseaseName, "in addDisease")
     addDisease(diseasesField, newDiseaseName, dispatch)
+    toggleInAddMode()
   }
 
   return (
