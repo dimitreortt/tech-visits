@@ -19,7 +19,14 @@ const useStyles = makeStyles((theme) => ({
 export const AddVisitForm = (props) => {
   const dispatch = useDispatch()
   const fieldId = useSelector(({ fieldId }) => fieldId)
-  const visitFormFields = useSelector(({ visitFields }) => visitFields)
+  const fieldsOrder = useSelector(({ fieldsOrder }) => fieldsOrder)
+  const visitFormFields = useSelector(({ visitFields }) => {
+    visitFields.sort(
+      (field1, field2) =>
+        fieldsOrder[field1.fieldId] - fieldsOrder[field2.fieldId]
+    )
+    return visitFields
+  })
   const [visitState, setVisitState] = useState()
   const visitFieldsIds = useSelector(({ visitFields }) =>
     visitFields.map((visitField) => visitField.fieldId)

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom"
 import downloadVisits from "../db/downloadVisits"
 import downloadFieldsContents from "../db/downloadFieldsContents"
 import downloadFarmAndGrowerInfo from "../db/downloadFarmAndGrowerInfo"
+import downloadFieldsOrder from "../db/donwloadFieldsOrder"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../materialUI/theme"
@@ -19,6 +20,7 @@ export const VisitsApp = () => {
       downloadFarmAndGrowerInfo(fieldId, dispatch)
       downloadVisits(fieldId, dispatch)
       downloadFieldsContents(dispatch)
+      downloadFieldsOrder(dispatch)
     }
   }, [fieldId])
 
