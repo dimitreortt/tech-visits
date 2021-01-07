@@ -6,7 +6,7 @@ export const downloadFieldsOrder = (dispatch) => {
     .get()
     .then((docRef) => {
       let orderObj = docRef.data()
-      console.log(orderObj, "orderObj")
+      console.log(orderObj, "orderObj successfully downloaded!")
       dispatch({ type: "SET_FIELDS_ORDER", orderObj })
     })
 }
