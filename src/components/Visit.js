@@ -13,19 +13,18 @@ export const Visit = ({ visit }) => {
   const fieldsOrder = useSelector(({ fieldsOrder }) => fieldsOrder)
 
   useEffect(() => {
-    let entries = Object.entries(visit).filter(
-      ([key, value]) => key !== "visitId" && key !== "fieldId"
-    )
+    if (fieldsOrder) {
+      let entries = Object.entries(visit).filter(
+        ([key, value]) => key !== "visitId" && key !== "fieldId"
+      )
 
-    entries.sort((e1, e2) => {
-      return fieldsOrder[e1[0]] - fieldsOrder[e2[0]]
-    })
-
-    // console.log(entries, "entries")
-
-    setEntries(entries)
-    // console.log(entries, "entries")
-  }, [visit])
+      entries.sort((e1, e2) => {
+        return fieldsOrder[e1[0]] - fieldsOrder[e2[0]]
+      })
+      // console.log(entries, "entries")
+      setEntries(entries)
+    }
+  }, [visit, fieldsOrder])
 
   useEffect(() => {
     // console.log(visitFormFields, "visitFormFields")

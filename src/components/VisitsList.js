@@ -4,16 +4,18 @@ import Visit from "./Visit"
 import { Typography } from "@material-ui/core"
 
 export const VisitsList = (props) => {
-  const visits = useSelector(({ visits, ids }) => {
-    const compareNewest = (visit1, visit2) => {
-      return visit2[ids.visitDateFieldId] - visit1[ids.visitDateFieldId]
-    }
-    return visits.sort(compareNewest)
+  const ids = useSelector(({ ids }) => ids)
+  const visits = useSelector(({ visits }) => {
+    return visits
   })
 
   useEffect(() => {
     console.log(visits, "visits mudou")
   }, [visits])
+
+  const compareNewest = (visit1, visit2) => {
+    return visit2[ids.visitDateFieldId] - visit1[ids.visitDateFieldId]
+  }
 
   return (
     <div>
@@ -26,7 +28,9 @@ export const VisitsList = (props) => {
         VISITAS TÉCNICAS
       </Typography>
       {!!visits &&
-        visits.map((visit, index) => <Visit key={index} visit={visit} />)}
+        visits.sort(compareNewest).map((visit, index) => {
+          return <Visit key={visit.visitId} visit={visit} />
+        })}
     </div>
   )
 }

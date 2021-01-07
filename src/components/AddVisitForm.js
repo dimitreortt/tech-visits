@@ -18,13 +18,18 @@ const useStyles = makeStyles((theme) => ({
 
 export const AddVisitForm = (props) => {
   const dispatch = useDispatch()
-  const fieldId = useSelector(({ fieldId }) => fieldId)
-  const fieldsOrder = useSelector(({ fieldsOrder }) => fieldsOrder)
-  const visitFormFields = useSelector(({ visitFields }) => {
+  const fieldId = useSelector(({ ids }) => ids.fieldId)
+  // const fieldsOrder = useSelector(({ fieldsOrder }) => fieldsOrder)
+  const visitFormFields = useSelector(({ visitFields, fieldsOrder }) => {
+    console.log(fieldsOrder, "fieldsOrder in addvisitfomr!")
+
+    console.log(visitFields, "visitFields before")
     visitFields.sort(
       (field1, field2) =>
         fieldsOrder[field1.fieldId] - fieldsOrder[field2.fieldId]
     )
+    console.log(visitFields, "visitFields after")
+
     return visitFields
   })
   const [visitState, setVisitState] = useState()
