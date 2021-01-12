@@ -47,6 +47,7 @@ export const AddVisitFormField = ({ field }) => {
         <TextField
           label={field.label.toUpperCase()}
           // value={fieldValue}
+          multiline
           value={visitContext.visitState[field.fieldId]}
           variant="filled"
           size="small"

@@ -4,8 +4,30 @@ import removeVisit from "../db/removeVisit"
 import VisitField from "./VisitField"
 import { Paper, Box, Grid, Button } from "@material-ui/core"
 import EditVisitForm from "./EditVisitForm"
+import { makeStyles } from '@material-ui/core/styles';
+
+
+
+const useStyles = makeStyles((theme) => ({
+
+  root: {
+    flexGrow: 1,
+    width: '100%',
+    maxWidth: 600,
+    // overflow: 'auto',
+    marginBottom: theme.spacing(2)
+    // padding: theme.spacing(0, 3),
+  },
+  
+  paper: {
+    // maxWidth: 600,
+    // margin: `${theme.spacing(1)}px auto`,
+    // padding: theme.spacing(2),
+  },
+}));
 
 export const Visit = ({ visit }) => {
+  const classes = useStyles();
   const [inEditMode, setInEditMode] = useState(false)
   const dispatch = useDispatch()
   const [entries, setEntries] = useState([])
@@ -52,8 +74,8 @@ export const Visit = ({ visit }) => {
   }
 
   return (
-    <Box marginBottom={1}>
-      <Paper>
+       <div className={classes.root}>
+      <Paper className={classes.paper}>
         <Grid container spacing={1}>
           <Box marginX={2} marginY={1}>
             {entries.map(([fieldId, value]) => {
@@ -110,7 +132,7 @@ export const Visit = ({ visit }) => {
           )}
         </Box>
       </Paper>
-    </Box>
+      </div>
   )
 }
 

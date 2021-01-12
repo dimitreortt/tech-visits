@@ -32,10 +32,10 @@ export default function Navbar() {
             color="primary"
             startIcon={<HomeIcon />}
             onClick={() => {
-              window.open("https://coopasvtech.web.app/", "_blank")
+              window.open("http://geagrotech.com.br/", "_blank")
             }}
           >
-            COOPASVTech
+            GEAGROTech
           </Button>
 
           <Typography variant="h6" className={classes.title}>

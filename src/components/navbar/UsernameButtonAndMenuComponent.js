@@ -40,7 +40,7 @@ export default function UsernameButtonAndMenuComponent() {
   }
 
   //TO-DO USERNAME
-  const [username, setusername] = React.useState("USERNAME")
+  const [username, setusername] = React.useState("SAIR")
   React.useEffect(() => {
     if (username) {
       function truncate(str, n) {

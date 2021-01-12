@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from "react"
 import DatePicker from "react-datepicker"
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles((theme) => ({
+  
+  // spanStyle: {
+  //   // maxWidth: 500,
+  //   whiteSpace: "normal",
+    
+    
+  //   // margin: `${theme.spacing(1)}px auto`,
+  //   // padding: theme.spacing(2),
+  // },
+}));
 
 export const VisitField = ({
   fieldLabel,
@@ -7,6 +21,7 @@ export const VisitField = ({
   editField,
   fieldValueType,
 }) => {
+  const classes = useStyles();
   const [inEditFieldMode, setInEditFieldMode] = useState(false)
   const [keyInput, setKeyInput] = useState("")
   const [valueInput, setValueInput] = useState("")
@@ -44,8 +59,8 @@ export const VisitField = ({
       <span>
         {fieldValueType === "date" &&
           !!fieldValue &&
-          fieldValue.toLocaleDateString()}
-        {fieldValueType === "string" && fieldValue}
+          fieldValue.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+        {fieldValueType === "string" && <Typography>{fieldValue}</Typography>}
         {fieldValueType === "checklist" &&
           !!fieldValue &&
           fieldValue.map((value, index) => (
