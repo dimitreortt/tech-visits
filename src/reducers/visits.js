@@ -22,3 +22,12 @@ export const visitsReducer = (state = defaultVisitsState, action) => {
 }
 
 export default visitsReducer
+
+const todosSlice = createSlice({
+  name: "slice name",
+  initialState: [],
+  reducers: {
+    add: (state, todo) => state.push(todo),
+    remove: (state, todoId) => state.filter((todo) => todo.todoId != todoId),
+  },
+})
